@@ -1,6 +1,6 @@
-# Cole App Flutter
+# Cole
 
-Uma aplicação de timer para estudos com foco em produtividade usando a técnica Pomodoro.
+Uma aplicação de timer para estudos com foco em produtividade.
 
 ## Recursos
 
@@ -19,23 +19,3 @@ Uma aplicação de timer para estudos com foco em produtividade usando a técnic
 - Sistema de constância de estudos para acompanhar seu progresso
 - Melhoria na exibição e organização de notas
 - Configurações para personalizar o aplicativo
-
-## Como configurar o ícone do aplicativo
-
-Para definir o gato com relógio como ícone do aplicativo:
-
-1. Salve a imagem do gato fornecida (2.png) em `assets/icons/app_icon.png`
-2. Execute o comando:
-
-```
-flutter pub run flutter_launcher_icons
-```
-
-Este comando irá gerar os ícones para Android, iOS e outras plataformas conforme configurado no arquivo `flutter_launcher_icons.yaml`.
-
-## Desenvolvido com
-
-- Flutter
-- Dart
-- Provider para gerenciamento de estado
-- Flutter Material 3 para design
