@@ -13,30 +13,37 @@ class SettingsScreen extends StatelessWidget {
     final theme = Theme.of(context);
     
     return Scaffold(
+      backgroundColor: theme.colorScheme.background,
       appBar: AppBar(
-        title: Text('Configurações'),
+        title: Text('Configurações', style: TextStyle(fontFamily: 'Segoe UI Light', fontWeight: FontWeight.w300)),
         leading: IconButton(
-          icon: Icon(Icons.arrow_back),
+          icon: Icon(Icons.arrow_back_rounded),
           onPressed: () => Navigator.pop(context),
+        ),
+        backgroundColor: theme.colorScheme.primary.withOpacity(0.95),
+        elevation: 0,
+        shape: const RoundedRectangleBorder(
+          borderRadius: BorderRadius.vertical(bottom: Radius.circular(28)),
         ),
       ),
       body: SingleChildScrollView(
         child: Padding(
-          padding: const EdgeInsets.all(16.0),
+          padding: const EdgeInsets.all(22.0),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              // Appearance section
+              // Aparência cartoon
               _buildSectionHeader(context, 'Aparência'),
-              
               Card(
-                margin: EdgeInsets.symmetric(vertical: 8),
+                margin: const EdgeInsets.symmetric(vertical: 10),
+                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(18)),
+                elevation: 2,
+                color: theme.colorScheme.surface,
                 child: Column(
                   children: [
-                    // Theme toggle
                     SwitchListTile(
-                      title: Text('Tema Escuro'),
-                      subtitle: Text('Mudar para o tema escuro'),
+                      title: Text('Tema Escuro', style: TextStyle(fontFamily: 'Segoe UI Light', fontWeight: FontWeight.w300)),
+                      subtitle: Text('Mudar para o tema escuro', style: TextStyle(fontFamily: 'Segoe UI Light')),
                       value: themeProvider.isDarkMode,
                       onChanged: (value) {
                         themeProvider.setThemeMode(
@@ -45,18 +52,17 @@ class SettingsScreen extends StatelessWidget {
                       },
                       secondary: Icon(
                         themeProvider.isDarkMode 
-                            ? Icons.dark_mode 
-                            : Icons.light_mode,
+                            ? Icons.dark_mode_rounded 
+                            : Icons.light_mode_rounded,
                         color: theme.colorScheme.primary,
                       ),
                     ),
-                    Divider(),
-                    // System theme option
+                    const Divider(),
                     ListTile(
-                      title: Text('Usar tema do sistema'),
-                      subtitle: Text('Segue o tema do seu dispositivo'),
+                      title: Text('Usar tema do sistema', style: TextStyle(fontFamily: 'Segoe UI Light', fontWeight: FontWeight.w300)),
+                      subtitle: Text('Segue o tema do seu dispositivo', style: TextStyle(fontFamily: 'Segoe UI Light')),
                       leading: Icon(
-                        Icons.settings_suggest,
+                        Icons.settings_suggest_rounded,
                         color: theme.colorScheme.primary,
                       ),
                       trailing: Radio<ThemeMode>(
@@ -75,25 +81,24 @@ class SettingsScreen extends StatelessWidget {
                   ],
                 ),
               ),
-              
-              SizedBox(height: 16),
-              
-              // Timer settings
+              const SizedBox(height: 18),
+              // Timer cartoon
               _buildSectionHeader(context, 'Temporizador'),
-              
               Card(
-                margin: EdgeInsets.symmetric(vertical: 8),
+                margin: const EdgeInsets.symmetric(vertical: 10),
+                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(18)),
+                elevation: 2,
+                color: theme.colorScheme.surface,
                 child: Column(
                   children: [
-                    // Pomodoro duration
                     ListTile(
-                      title: Text('Duração do Pomodoro'),
-                      subtitle: Text('25 minutos (padrão)'),
+                      title: Text('Duração do Pomodoro', style: TextStyle(fontFamily: 'Segoe UI Light', fontWeight: FontWeight.w300)),
+                      subtitle: Text('25 minutos (padrão)', style: TextStyle(fontFamily: 'Segoe UI Light')),
                       leading: Icon(
-                        Icons.timer_outlined,
+                        Icons.timer_rounded,
                         color: theme.colorScheme.primary,
                       ),
-                      trailing: Icon(Icons.chevron_right),
+                      trailing: Icon(Icons.chevron_right_rounded),
                       onTap: () {
                         _showDurationPicker(
                           context, 
@@ -103,16 +108,15 @@ class SettingsScreen extends StatelessWidget {
                         );
                       },
                     ),
-                    Divider(),
-                    // Short break duration
+                    const Divider(),
                     ListTile(
-                      title: Text('Pausa Curta'),
-                      subtitle: Text('5 minutos (padrão)'),
+                      title: Text('Pausa Curta', style: TextStyle(fontFamily: 'Segoe UI Light', fontWeight: FontWeight.w300)),
+                      subtitle: Text('5 minutos (padrão)', style: TextStyle(fontFamily: 'Segoe UI Light')),
                       leading: Icon(
-                        Icons.coffee_outlined,
+                        Icons.coffee_rounded,
                         color: theme.colorScheme.primary,
                       ),
-                      trailing: Icon(Icons.chevron_right),
+                      trailing: Icon(Icons.chevron_right_rounded),
                       onTap: () {
                         _showDurationPicker(
                           context, 
@@ -122,16 +126,15 @@ class SettingsScreen extends StatelessWidget {
                         );
                       },
                     ),
-                    Divider(),
-                    // Long break duration
+                    const Divider(),
                     ListTile(
-                      title: Text('Pausa Longa'),
-                      subtitle: Text('15 minutos (padrão)'),
+                      title: Text('Pausa Longa', style: TextStyle(fontFamily: 'Segoe UI Light', fontWeight: FontWeight.w300)),
+                      subtitle: Text('15 minutos (padrão)', style: TextStyle(fontFamily: 'Segoe UI Light')),
                       leading: Icon(
-                        Icons.self_improvement_outlined,
+                        Icons.self_improvement_rounded,
                         color: theme.colorScheme.primary,
                       ),
-                      trailing: Icon(Icons.chevron_right),
+                      trailing: Icon(Icons.chevron_right_rounded),
                       onTap: () {
                         _showDurationPicker(
                           context, 
@@ -141,124 +144,55 @@ class SettingsScreen extends StatelessWidget {
                         );
                       },
                     ),
-                    Divider(),
-                    // Sound option
+                    const Divider(),
                     SwitchListTile(
-                      title: Text('Som ao finalizar'),
-                      subtitle: Text('Tocar som quando o timer terminar'),
+                      title: Text('Som ao finalizar', style: TextStyle(fontFamily: 'Segoe UI Light', fontWeight: FontWeight.w300)),
+                      subtitle: Text('Tocar som quando o timer terminar', style: TextStyle(fontFamily: 'Segoe UI Light')),
                       value: false, // TODO: Implement sound feature
-                      onChanged: (value) {
-                        // TODO: Implement sound feature
-                      },
+                      onChanged: (value) {},
                       secondary: Icon(
-                        Icons.volume_up_outlined,
+                        Icons.volume_up_rounded,
                         color: theme.colorScheme.primary,
                       ),
                     ),
                   ],
                 ),
               ),
-              
-              SizedBox(height: 16),
-              
-              // Notifications section
+              const SizedBox(height: 18),
+              // Notificações cartoon
               _buildSectionHeader(context, 'Notificações'),
-              
               Card(
-                margin: EdgeInsets.symmetric(vertical: 8),
+                margin: const EdgeInsets.symmetric(vertical: 10),
+                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(18)),
+                elevation: 2,
+                color: theme.colorScheme.surface,
                 child: Column(
                   children: [
-                    // Enable notifications
                     SwitchListTile(
-                      title: Text('Ativar Notificações'),
-                      subtitle: Text('Receber lembretes e notificações'),
+                      title: Text('Ativar Notificações', style: TextStyle(fontFamily: 'Segoe UI Light', fontWeight: FontWeight.w300)),
+                      subtitle: Text('Receber lembretes e notificações', style: TextStyle(fontFamily: 'Segoe UI Light')),
                       value: false, // TODO: Implement notifications
-                      onChanged: (value) {
-                        // TODO: Implement notifications
-                      },
+                      onChanged: (value) {},
                       secondary: Icon(
-                        Icons.notifications_outlined,
+                        Icons.notifications_active_rounded,
                         color: theme.colorScheme.primary,
                       ),
                     ),
-                    Divider(),
-                    // Daily reminders
+                    const Divider(),
                     ListTile(
-                      title: Text('Lembrete Diário'),
-                      subtitle: Text('Desativado'),
+                      title: Text('Lembrete Diário', style: TextStyle(fontFamily: 'Segoe UI Light', fontWeight: FontWeight.w300)),
+                      subtitle: Text('Desativado', style: TextStyle(fontFamily: 'Segoe UI Light')),
                       leading: Icon(
-                        Icons.access_time,
+                        Icons.access_time_rounded,
                         color: theme.colorScheme.primary,
                       ),
-                      trailing: Icon(Icons.chevron_right),
-                      onTap: () {
-                        // TODO: Implement time picker
-                      },
+                      trailing: Icon(Icons.chevron_right_rounded),
+                      onTap: () {},
                       enabled: false, // TODO: Link to notification toggle
                     ),
                   ],
                 ),
               ),
-              
-              SizedBox(height: 16),
-              
-              // About section
-              _buildSectionHeader(context, 'Sobre'),
-              
-              Card(
-                margin: EdgeInsets.symmetric(vertical: 8),
-                child: Column(
-                  children: [
-                    ListTile(
-                      title: Text('Versão'),
-                      subtitle: Text('0.3.2'),
-                      leading: Icon(
-                        Icons.info_outline,
-                        color: theme.colorScheme.primary,
-                      ),
-                    ),
-                    Divider(),
-                    ListTile(
-                      title: Text('Política de Privacidade'),
-                      leading: Icon(
-                        Icons.privacy_tip_outlined,
-                        color: theme.colorScheme.primary,
-                      ),
-                      trailing: Icon(Icons.open_in_new),
-                      onTap: () {
-                        // TODO: Open privacy policy
-                      },
-                    ),
-                    Divider(),
-                    ListTile(
-                      title: Text('Termos de Uso'),
-                      leading: Icon(
-                        Icons.article_outlined,
-                        color: theme.colorScheme.primary,
-                      ),
-                      trailing: Icon(Icons.open_in_new),
-                      onTap: () {
-                        // TODO: Open terms of use
-                      },
-                    ),
-                  ],
-                ),
-              ),
-              
-              SizedBox(height: 24),
-              
-              // Reset data option
-              Center(
-                child: OutlinedButton.icon(
-                  onPressed: () {
-                    _showResetConfirmation(context);
-                  },
-                  icon: Icon(Icons.restore),
-                  label: Text('Redefinir Dados'),
-                ),
-              ),
-              
-              SizedBox(height: 24),
             ],
           ),
         ),
@@ -434,12 +368,7 @@ class SettingsScreen extends StatelessWidget {
               Navigator.pop(context);
               
               // Show confirmation
-              ScaffoldMessenger.of(context).showSnackBar(
-                SnackBar(
-                  content: Text('Duração atualizada para $minutes minutos'),
-                  behavior: SnackBarBehavior.floating,
-                ),
-              );
+              _showSettingsSaved(context);
             },
             child: Text('SALVAR'),
           ),
@@ -569,6 +498,24 @@ class SettingsScreen extends StatelessWidget {
             child: Text('REDEFINIR'),
           ),
         ],
+      ),
+    );
+  }
+
+  void _showSettingsSaved(BuildContext context) {
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: Row(
+          children: [
+            Icon(Icons.check_circle_rounded, color: Theme.of(context).colorScheme.tertiary, size: 28),
+            SizedBox(width: 12),
+            Expanded(child: Text('Configuração salva!')),
+          ],
+        ),
+        backgroundColor: Theme.of(context).colorScheme.tertiary,
+        behavior: SnackBarBehavior.floating,
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+        duration: Duration(seconds: 2),
       ),
     );
   }

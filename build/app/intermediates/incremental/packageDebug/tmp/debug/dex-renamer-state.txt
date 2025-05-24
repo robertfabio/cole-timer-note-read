@@ -1,19 +1,25 @@
-#Mon May 19 12:13:18 BRT 2025
+#Thu May 22 21:31:28 BRT 2025
 path.4=14/classes.dex
 path.3=1/classes.dex
 path.2=0/classes.dex
 path.1=0/classes.dex
-path.5=classes1000.dex
+path.7=classes2.dex
+path.6=classes1000.dex
+path.5=9/classes.dex
 path.0=classes.dex
-base.4=/home/fabio/Projetcs/cole_app_flutter/build/app/intermediates/dex/debug/mergeProjectDexDebug/14/classes.dex
-base.3=/home/fabio/Projetcs/cole_app_flutter/build/app/intermediates/dex/debug/mergeProjectDexDebug/1/classes.dex
-base.2=/home/fabio/Projetcs/cole_app_flutter/build/app/intermediates/dex/debug/mergeProjectDexDebug/0/classes.dex
-base.1=/home/fabio/Projetcs/cole_app_flutter/build/app/intermediates/dex/debug/mergeLibDexDebug/0/classes.dex
-base.0=/home/fabio/Projetcs/cole_app_flutter/build/app/intermediates/dex/debug/mergeExtDexDebug/classes.dex
+base.4=/home/fabio/Projetcs/cole-timer-note-read/build/app/intermediates/dex/debug/mergeProjectDexDebug/14/classes.dex
+base.3=/home/fabio/Projetcs/cole-timer-note-read/build/app/intermediates/dex/debug/mergeProjectDexDebug/1/classes.dex
+base.2=/home/fabio/Projetcs/cole-timer-note-read/build/app/intermediates/dex/debug/mergeProjectDexDebug/0/classes.dex
+base.1=/home/fabio/Projetcs/cole-timer-note-read/build/app/intermediates/dex/debug/mergeLibDexDebug/0/classes.dex
+base.0=/home/fabio/Projetcs/cole-timer-note-read/build/app/intermediates/dex/debug/mergeExtDexDebug/classes.dex
 renamed.3=classes4.dex
 renamed.2=classes3.dex
 renamed.1=classes2.dex
 renamed.0=classes.dex
+renamed.7=classes8.dex
+renamed.6=classes7.dex
+base.7=/home/fabio/Projetcs/cole-timer-note-read/build/app/intermediates/dex/debug/mergeExtDexDebug/classes2.dex
 renamed.5=classes6.dex
+base.6=/home/fabio/Projetcs/cole-timer-note-read/build/app/intermediates/desugar_lib_dex/debug/l8DexDesugarLibDebug/classes1000.dex
 renamed.4=classes5.dex
-base.5=/home/fabio/Projetcs/cole_app_flutter/build/app/intermediates/desugar_lib_dex/debug/l8DexDesugarLibDebug/classes1000.dex
+base.5=/home/fabio/Projetcs/cole-timer-note-read/build/app/intermediates/dex/debug/mergeProjectDexDebug/9/classes.dex

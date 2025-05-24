@@ -49,6 +49,7 @@ class NotificationsScreen extends StatelessWidget {
           : _buildNotificationsList(context, notificationsProvider),
       floatingActionButton: notifications.isNotEmpty
           ? FloatingActionButton(
+              heroTag: 'fab_notifications',
               mini: true,
               onPressed: () {
                 _showClearConfirmation(context, notificationsProvider);
@@ -599,6 +600,24 @@ class NotificationsScreen extends StatelessWidget {
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
         content: Text('Notificação de teste "$notificationType" criada'),
+        duration: Duration(seconds: 2),
+      ),
+    );
+  }
+
+  void _showNotificationRead(BuildContext context) {
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: Row(
+          children: [
+            Icon(Icons.mark_email_read_rounded, color: Theme.of(context).colorScheme.tertiary, size: 28),
+            SizedBox(width: 12),
+            Expanded(child: Text('Notificação marcada como lida!')),
+          ],
+        ),
+        backgroundColor: Theme.of(context).colorScheme.tertiary,
+        behavior: SnackBarBehavior.floating,
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
         duration: Duration(seconds: 2),
       ),
     );

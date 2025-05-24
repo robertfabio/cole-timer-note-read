@@ -4,76 +4,95 @@ import 'package:timezone/data/latest.dart' as tz;
 import 'package:timezone/timezone.dart' as tz;
 
 class NotificationService {
-  static final FlutterLocalNotificationsPlugin _notificationsPlugin = FlutterLocalNotificationsPlugin();
+  static final NotificationService _instance = NotificationService._();
+  factory NotificationService() => _instance;
+  NotificationService._();
 
-  static Future<void> init() async {
-    // Inicializa timezone
+  final FlutterLocalNotificationsPlugin _notifications = FlutterLocalNotificationsPlugin();
+
+  Future<void> initialize() async {
     tz.initializeTimeZones();
 
-    const AndroidInitializationSettings androidSettings = AndroidInitializationSettings('@mipmap/ic_launcher');
-    const DarwinInitializationSettings iosSettings = DarwinInitializationSettings();
-    const InitializationSettings initSettings = InitializationSettings(
+    const androidSettings = AndroidInitializationSettings('@mipmap/ic_launcher');
+    const iosSettings = DarwinInitializationSettings(
+      requestAlertPermission: true,
+      requestBadgePermission: true,
+      requestSoundPermission: true,
+    );
+
+    const initSettings = InitializationSettings(
       android: androidSettings,
       iOS: iosSettings,
     );
-    await _notificationsPlugin.initialize(initSettings);
-  }
 
-  static Future<void> requestPermissions() async {
-    // No Android, permissões são solicitadas automaticamente ou via runtime (Android 13+), mas o plugin não expõe requestPermission().
-    // Para iOS:
-    await _notificationsPlugin.resolvePlatformSpecificImplementation<IOSFlutterLocalNotificationsPlugin>()?.requestPermissions(
-      alert: true,
-      badge: true,
-      sound: true,
+    await _notifications.initialize(
+      initSettings,
+      onDidReceiveNotificationResponse: (NotificationResponse response) async {
+        // Handle notification tap
+      },
     );
+
+    // Create notification channel for Android
+    await _notifications
+        .resolvePlatformSpecificImplementation<AndroidFlutterLocalNotificationsPlugin>()
+        ?.createNotificationChannel(
+          const AndroidNotificationChannel(
+            'cole_notifications',
+            'Cole Notifications',
+            description: 'Notifications for Cole Timer',
+            importance: Importance.high,
+            enableVibration: true,
+            enableLights: true,
+            ledColor: Color(0xFF6750A4), // Material 3 primary color
+          ),
+        );
   }
 
-  static Future<void> showNotification({
+  Future<void> showNotification({
     required String title,
     required String body,
-    int id = 0,
+    String? payload,
   }) async {
-    const AndroidNotificationDetails androidDetails = AndroidNotificationDetails(
-      'cole_channel',
-      'Notificações do Cole',
-      channelDescription: 'Notificações gerais do app Cole',
-      importance: Importance.max,
+    const androidDetails = AndroidNotificationDetails(
+      'cole_notifications',
+      'Cole Notifications',
+      channelDescription: 'Notifications for Cole Timer',
+      importance: Importance.high,
       priority: Priority.high,
-      playSound: true,
+      showWhen: true,
+      enableVibration: true,
+      enableLights: true,
+      ledColor: Color(0xFF6750A4), // Material 3 primary color
+      ledOnMs: 1000,
+      ledOffMs: 500,
+      styleInformation: BigTextStyleInformation(''),
     );
-    const DarwinNotificationDetails iosDetails = DarwinNotificationDetails();
-    const NotificationDetails details = NotificationDetails(
+
+    const iosDetails = DarwinNotificationDetails(
+      presentAlert: true,
+      presentBadge: true,
+      presentSound: true,
+    );
+
+    const details = NotificationDetails(
       android: androidDetails,
       iOS: iosDetails,
     );
-    await _notificationsPlugin.show(id, title, body, details);
-  }
 
-  static Future<void> scheduleNotification({
-    required String title,
-    required String body,
-    required DateTime scheduledTime,
-    int id = 0,
-  }) async {
-    await _notificationsPlugin.zonedSchedule(
-      id,
+    await _notifications.show(
+      DateTime.now().millisecond,
       title,
       body,
-      tz.TZDateTime.from(scheduledTime, tz.local),
-      const NotificationDetails(
-        android: AndroidNotificationDetails(
-          'cole_channel',
-          'Notificações do Cole',
-          channelDescription: 'Notificações gerais do app Cole',
-          importance: Importance.max,
-          priority: Priority.high,
-          playSound: true,
-        ),
-        iOS: DarwinNotificationDetails(),
-      ),
-      androidScheduleMode: AndroidScheduleMode.exactAllowWhileIdle,
-      matchDateTimeComponents: DateTimeComponents.time,
+      details,
+      payload: payload,
     );
+  }
+
+  Future<void> cancelAll() async {
+    await _notifications.cancelAll();
+  }
+
+  Future<void> cancel(int id) async {
+    await _notifications.cancel(id);
   }
 } 

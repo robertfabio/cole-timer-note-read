@@ -4,13 +4,16 @@ import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:uuid/uuid.dart';
 import '../models/study_session.dart';
-// import '../services/notification_service.dart';
+import 'package:flutter_local_notifications/flutter_local_notifications.dart';
+import '../services/notification_service.dart';
 
 enum TimerMode { focus, shortBreak, longBreak }
+enum TimerState { idle, running, paused, completed }
+enum NotificationType { pomodoroComplete, breakComplete, sessionComplete }
 
 class TimerProvider extends ChangeNotifier {
   // Timer state
-  bool _isRunning = false;
+  TimerState _timerState = TimerState.idle;
   DateTime? _startTime;
   int _pausedTime = 0;
   int _totalStudyTime = 0;
@@ -47,13 +50,18 @@ class TimerProvider extends ChangeNotifier {
   static const String _sessionsKey = 'cole_study_sessions';
   static const String _streakKey = 'cole_study_streak';
   
+  // Notification service
+  final NotificationService _notificationService = NotificationService();
+  
   // Constructor
   TimerProvider() {
     _loadSavedData();
+    _initializeNotifications();
   }
   
   // Getters
-  bool get isRunning => _isRunning;
+  TimerState get timerState => _timerState;
+  bool get isRunning => _timerState == TimerState.running;
   int get totalStudyTime => _totalStudyTime;
   List<StudySession> get studySessions => _studySessions;
   TimerMode get timerMode => _timerMode;
@@ -92,7 +100,7 @@ class TimerProvider extends ChangeNotifier {
     if (timerStateJson != null) {
       final timerState = jsonDecode(timerStateJson);
       
-      _isRunning = false; // Always start paused
+      _timerState = _stringToTimerState(timerState['timerState'] ?? 'idle');
       _pausedTime = timerState['pausedTime'] ?? 0;
       _totalStudyTime = timerState['totalStudyTime'] ?? 0;
       _timerMode = _stringToTimerMode(timerState['timerMode'] ?? 'focus');
@@ -238,7 +246,7 @@ class TimerProvider extends ChangeNotifier {
     final prefs = await SharedPreferences.getInstance();
     
     final timerState = {
-      'isRunning': _isRunning,
+      'timerState': _timerStateToString(_timerState),
       'pausedTime': _pausedTime,
       'totalStudyTime': _totalStudyTime,
       'timerMode': _timerModeToString(_timerMode),
@@ -289,11 +297,37 @@ class TimerProvider extends ChangeNotifier {
     }
   }
   
-  // Timer control methods
+  TimerState _stringToTimerState(String state) {
+    switch (state) {
+      case 'running':
+        return TimerState.running;
+      case 'paused':
+        return TimerState.paused;
+      case 'completed':
+        return TimerState.completed;
+      default:
+        return TimerState.idle;
+    }
+  }
+  
+  String _timerStateToString(TimerState state) {
+    switch (state) {
+      case TimerState.running:
+        return 'running';
+      case TimerState.paused:
+        return 'paused';
+      case TimerState.completed:
+        return 'completed';
+      default:
+        return 'idle';
+    }
+  }
+  
+  // Timer control methods with improved state management
   void startTimer() {
-    if (_isRunning) return;
+    if (_timerState == TimerState.running) return;
     
-    _isRunning = true;
+    _timerState = TimerState.running;
     _startTime = DateTime.now();
     
     _startTimerInterval();
@@ -303,9 +337,9 @@ class TimerProvider extends ChangeNotifier {
   }
   
   void pauseTimer() {
-    if (!_isRunning) return;
+    if (_timerState != TimerState.running) return;
     
-    _isRunning = false;
+    _timerState = TimerState.paused;
     if (_startTime != null) {
       _pausedTime += DateTime.now().difference(_startTime!).inMilliseconds;
       _startTime = null;
@@ -320,7 +354,7 @@ class TimerProvider extends ChangeNotifier {
   void resetTimer() {
     pauseTimer();
     
-    _isRunning = false;
+    _timerState = TimerState.idle;
     _startTime = null;
     _pausedTime = 0;
     _totalStudyTime = _customTimerDuration != null ? -_customTimerDuration! : 0;
@@ -330,15 +364,44 @@ class TimerProvider extends ChangeNotifier {
     _saveTimerState();
   }
   
-  Future<void> saveSession(
-    String name, 
-    {
-      bool isScheduledSession = false, 
-      String? scheduledSessionId,
-      String? category,
-      List<String>? tags
+  // Improved Pomodoro handling
+  void _handlePomodoroComplete() async {
+    pauseTimer();
+    
+    TimerMode nextMode;
+    if (_timerMode == TimerMode.focus) {
+      _pomodoroCount++;
+      await _showNotification(NotificationType.pomodoroComplete);
+      // After 4 focus sessions, take a long break
+      nextMode = (_pomodoroCount % 4 == 0) ? TimerMode.longBreak : TimerMode.shortBreak;
+    } else {
+      await _showNotification(NotificationType.breakComplete);
+      // Notificação cartoon ao fim do descanso
+      final notificationService = NotificationService();
+      await notificationService.showNotification(
+        title: 'Descanso finalizado!',
+        body: 'Hora de voltar ao foco! Continue sua jornada.',
+      );
+      nextMode = TimerMode.focus;
     }
-  ) async {
+    _timerMode = nextMode;
+    _timeLeft = _getCurrentModeDuration(mode: nextMode);
+    _progress = 1.0;
+    _pausedTime = 0;
+    _startTime = null;
+    
+    notifyListeners();
+    _saveTimerState();
+  }
+  
+  // Improved session saving
+  Future<void> saveSession(
+    String name, {
+    bool isScheduledSession = false,
+    String? scheduledSessionId,
+    String? category,
+    List<String>? tags
+  }) async {
     if (_totalStudyTime <= 0) return;
     
     _isSaving = true;
@@ -357,7 +420,7 @@ class TimerProvider extends ChangeNotifier {
     
     _studySessions = [session, ..._studySessions];
     
-    _isRunning = false;
+    _timerState = TimerState.idle;
     _startTime = null;
     _pausedTime = 0;
     _totalStudyTime = 0;
@@ -366,6 +429,7 @@ class TimerProvider extends ChangeNotifier {
     // Update study streak
     _updateStreak();
     
+    await _showNotification(NotificationType.sessionComplete);
     await _saveStudySessions();
     await _saveTimerState();
     
@@ -377,7 +441,6 @@ class TimerProvider extends ChangeNotifier {
     pauseTimer();
     
     _timerMode = mode;
-    _isRunning = false;
     _startTime = null;
     _pausedTime = 0;
     
@@ -395,7 +458,6 @@ class TimerProvider extends ChangeNotifier {
     
     _isPomodoroActive = !_isPomodoroActive;
     _timerMode = TimerMode.focus;
-    _isRunning = false;
     _startTime = null;
     _pausedTime = 0;
     _customTimerDuration = null;
@@ -424,7 +486,6 @@ class TimerProvider extends ChangeNotifier {
       _totalStudyTime = -duration;
     }
     
-    _isRunning = false;
     _startTime = null;
     _pausedTime = 0;
     
@@ -465,7 +526,7 @@ class TimerProvider extends ChangeNotifier {
       _startTime = null; // Reset start time
       
       // Start the timer automatically if it was running
-      if (_isRunning) {
+      if (_timerState == TimerState.running) {
         _startTime = DateTime.now();
         _startTimerInterval();
       }
@@ -483,7 +544,7 @@ class TimerProvider extends ChangeNotifier {
     _timer?.cancel();
     
     _timer = Timer.periodic(const Duration(milliseconds: 100), (timer) {
-      if (!_isRunning) {
+      if (_timerState != TimerState.running) {
         timer.cancel();
         return;
       }
@@ -525,41 +586,6 @@ class TimerProvider extends ChangeNotifier {
     });
   }
   
-  // Handle pomodoro completion
-  void _handlePomodoroComplete() {
-    pauseTimer();
-    
-    // Send notification
-    // NotificationService.showTimerCompletedNotification(
-    //   title: 'Tempo finalizado!',
-    //   body: 'Seu cronômetro ${_timerModeToString(_timerMode)} terminou.',
-    // );
-    
-    TimerMode nextMode;
-    if (_timerMode == TimerMode.focus) {
-      _pomodoroCount++;
-      
-      // After 4 focus sessions, take a long break
-      if (_pomodoroCount % 4 == 0) {
-        nextMode = TimerMode.longBreak;
-      } else {
-        nextMode = TimerMode.shortBreak;
-      }
-    } else {
-      // After break, go back to focus
-      nextMode = TimerMode.focus;
-    }
-    
-    _timerMode = nextMode;
-    _timeLeft = _getCurrentModeDuration(mode: nextMode);
-    _progress = 1.0;
-    _pausedTime = 0;
-    _startTime = null;
-    
-    notifyListeners();
-    _saveTimerState();
-  }
-  
   // Get next pomodoro mode
   TimerMode getNextPomodoroMode() {
     if (_timerMode == TimerMode.focus) {
@@ -587,6 +613,38 @@ class TimerProvider extends ChangeNotifier {
     final secondsStr = '${seconds.toString().padLeft(2, '0')}';
     
     return '${isNegative ? '-' : ''}$hoursStr$minutesStr:$secondsStr';
+  }
+  
+  // Initialize notifications
+  Future<void> _initializeNotifications() async {
+    await _notificationService.initialize();
+  }
+
+  // Show notification based on type
+  Future<void> _showNotification(NotificationType type) async {
+    String title;
+    String body;
+
+    switch (type) {
+      case NotificationType.pomodoroComplete:
+        title = 'Pomodoro Concluído!';
+        body = 'Hora de fazer uma pausa.';
+        break;
+      case NotificationType.breakComplete:
+        title = 'Pausa Finalizada!';
+        body = 'Hora de voltar aos estudos.';
+        break;
+      case NotificationType.sessionComplete:
+        title = 'Sessão Concluída!';
+        body = 'Parabéns por manter o foco!';
+        break;
+    }
+
+    await _notificationService.showNotification(
+      title: title,
+      body: body,
+      payload: type.toString(),
+    );
   }
   
   @override

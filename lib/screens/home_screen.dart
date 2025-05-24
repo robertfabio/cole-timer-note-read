@@ -36,117 +36,199 @@ class HomeScreen extends StatelessWidget {
     final totalSessions = timerProvider.studySessions.length;
     
     return Scaffold(
+      backgroundColor: theme.colorScheme.background,
       body: SafeArea(
         child: SingleChildScrollView(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              // Header section with gradient background
+              // Header cartoon ultra viciante
               Container(
                 width: size.width,
-                padding: const EdgeInsets.all(24),
+                padding: const EdgeInsets.all(28),
                 decoration: BoxDecoration(
                   gradient: LinearGradient(
                     begin: Alignment.topLeft,
                     end: Alignment.bottomRight,
                     colors: [
-                      theme.colorScheme.primary.withOpacity(0.9),
-                      theme.colorScheme.primary.withOpacity(0.7),
+                      theme.colorScheme.primary.withOpacity(0.95),
+                      theme.colorScheme.secondary.withOpacity(0.85),
                     ],
                   ),
-                  borderRadius: BorderRadius.only(
-                    bottomLeft: Radius.circular(30),
-                    bottomRight: Radius.circular(30),
+                  borderRadius: const BorderRadius.only(
+                    bottomLeft: Radius.circular(40),
+                    bottomRight: Radius.circular(40),
                   ),
+                  boxShadow: [
+                    BoxShadow(
+                      color: theme.colorScheme.primary.withOpacity(0.08),
+                      blurRadius: 24,
+                      offset: Offset(0, 8),
+                    ),
+                  ],
                 ),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(
-                      greeting + ',',
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 22,
-                        fontWeight: FontWeight.w500,
-                      ),
+                    Row(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        // Mascote cartoon animado
+                        Stack(
+                          alignment: Alignment.topRight,
+                          children: [
+                            CircleAvatar(
+                              radius: 34,
+                              backgroundColor: theme.colorScheme.secondary.withOpacity(0.25),
+                              child: Icon(Icons.emoji_emotions_rounded, size: 48, color: theme.colorScheme.primary),
+                            ),
+                            // Balão de fala motivacional
+                            Positioned(
+                              right: -8,
+                              top: 0,
+                              child: Container(
+                                padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+                                decoration: BoxDecoration(
+                                  color: theme.colorScheme.secondary,
+                                  borderRadius: BorderRadius.circular(16),
+                                  boxShadow: [
+                                    BoxShadow(
+                                      color: Colors.black12,
+                                      blurRadius: 6,
+                                      offset: Offset(0, 2),
+                                    ),
+                                  ],
+                                ),
+                                child: Text(
+                                  _motivationalMessage(),
+                                  style: TextStyle(
+                                    fontFamily: 'Segoe UI Light',
+                                    color: Colors.black87,
+                                    fontSize: 13,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                        const SizedBox(width: 16),
+                        Expanded(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                greeting + ',',
+                                style: TextStyle(
+                                  fontFamily: 'Segoe UI Light',
+                                  color: Colors.white,
+                                  fontSize: 22,
+                                  fontWeight: FontWeight.w300,
+                                ),
+                              ),
+                              Text(
+                                'Pronto para estudar?',
+                                style: TextStyle(
+                                  fontFamily: 'Segoe UI Light',
+                                  color: Colors.white,
+                                  fontSize: 28,
+                                  fontWeight: FontWeight.w300,
+                                  letterSpacing: 1.2,
+                                ),
+                              ),
+                              const SizedBox(height: 10),
+                              // Barra de XP cartoon
+                              _buildXPBar(context, timerProvider),
+                            ],
+                          ),
+                        ),
+                        // Botão estatísticas
+                        IconButton(
+                          icon: Icon(Icons.bar_chart_rounded, color: Colors.white, size: 28),
+                          tooltip: 'Estatísticas',
+                          onPressed: () {
+                            Navigator.pushNamed(context, '/stats');
+                          },
+                        ),
+                        // Botão biblioteca
+                        IconButton(
+                          icon: Icon(Icons.menu_book_rounded, color: Colors.white, size: 28),
+                          tooltip: 'Biblioteca',
+                          onPressed: () {
+                            navigationProvider.setIndex(3);
+                          },
+                        ),
+                      ],
                     ),
-                    const SizedBox(height: 8),
-                    Text(
-                      'Pronto para estudar?',
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 30,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                    const SizedBox(height: 24),
-                    // Stats summary row
+                    const SizedBox(height: 18),
+                    // Stats cartoon
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceAround,
                       children: [
                         _buildStatItem(
-                          icon: Icons.timer_outlined,
+                          icon: Icons.timer_rounded,
                           value: hours > 0 
                               ? '$hours h ${minutes > 0 ? "$minutes min" : ""}'
                               : '$minutes min',
                           label: 'Tempo Total',
                         ),
                         _buildStatItem(
-                          icon: Icons.calendar_today_outlined,
+                          icon: Icons.calendar_today_rounded,
                           value: '$totalSessions',
                           label: 'Sessões',
                         ),
                         _buildStatItem(
-                          icon: Icons.local_fire_department_outlined,
+                          icon: Icons.local_fire_department_rounded,
                           value: '${timerProvider.currentStreak}',
                           label: 'Sequência',
                         ),
                       ],
                     ),
-                    const SizedBox(height: 16),
                   ],
                 ),
               ),
-              
-              const SizedBox(height: 24),
-              
-              // Quick action buttons
+              const SizedBox(height: 28),
+              // Botão cartoon de ação rápida
               Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 24),
-                child: Row(
-                  children: [
-                    Expanded(
-                      child: _buildQuickActionButton(
-                        context,
-                        icon: Icons.play_arrow_rounded,
-                        label: 'Iniciar Timer',
-                        color: theme.colorScheme.primary,
-                        onTap: () {
-                          // Navigate to Timer tab
-                          navigationProvider.setIndex(1);
-                        },
-                      ),
+                padding: const EdgeInsets.symmetric(horizontal: 28),
+                child: GestureDetector(
+                  onTap: () => navigationProvider.setIndex(1),
+                  child: Container(
+                    decoration: BoxDecoration(
+                      color: theme.colorScheme.secondary,
+                      borderRadius: BorderRadius.circular(18),
+                      boxShadow: [
+                        BoxShadow(
+                          color: theme.colorScheme.secondary.withOpacity(0.18),
+                          blurRadius: 12,
+                          offset: Offset(0, 6),
+                        ),
+                      ],
                     ),
-                    const SizedBox(width: 16),
-                    Expanded(
-                      child: _buildQuickActionButton(
-                        context,
-                        icon: Icons.bar_chart_rounded,
-                        label: 'Estatísticas',
-                        color: theme.colorScheme.secondary,
-                        onTap: () {
-                          // Navigate to Stats tab
-                          navigationProvider.setIndex(3);
-                        },
-                      ),
+                    padding: const EdgeInsets.symmetric(vertical: 18, horizontal: 32),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Icon(Icons.play_arrow_rounded, color: Colors.white, size: 32),
+                        const SizedBox(width: 12),
+                        Text(
+                          'Iniciar Timer',
+                          style: TextStyle(
+                            fontFamily: 'Segoe UI Light',
+                            color: Colors.white,
+                            fontSize: 22,
+                            fontWeight: FontWeight.w300,
+                          ),
+                        ),
+                      ],
                     ),
-                  ],
+                  ),
                 ),
               ),
-              
-              // Recent sessions
+              const SizedBox(height: 28),
+              // Recentes cartoon
               Padding(
-                padding: const EdgeInsets.all(24),
+                padding: const EdgeInsets.all(28),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -156,7 +238,9 @@ class HomeScreen extends StatelessWidget {
                         Text(
                           'Sessões Recentes',
                           style: theme.textTheme.titleLarge?.copyWith(
-                            fontWeight: FontWeight.bold,
+                            fontFamily: 'Segoe UI Light',
+                            fontWeight: FontWeight.w300,
+                            fontSize: 22,
                           ),
                         ),
                         if (timerProvider.studySessions.isNotEmpty)
@@ -170,13 +254,15 @@ class HomeScreen extends StatelessWidget {
                             child: Text('Ver todas'),
                             style: TextButton.styleFrom(
                               foregroundColor: theme.colorScheme.primary,
+                              textStyle: TextStyle(
+                                fontFamily: 'Segoe UI Light',
+                                fontWeight: FontWeight.w300,
+                              ),
                             ),
                           ),
                       ],
                     ),
-                    
                     const SizedBox(height: 16),
-                    
                     if (timerProvider.studySessions.isEmpty)
                       _buildEmptySessionsState(context)
                     else
@@ -186,93 +272,54 @@ class HomeScreen extends StatelessWidget {
                   ],
                 ),
               ),
-              
-              // Streak system
+              // Streak cartoon
               Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 24),
+                padding: const EdgeInsets.symmetric(horizontal: 28),
                 child: Container(
-                  padding: const EdgeInsets.all(20),
+                  padding: const EdgeInsets.all(22),
                   decoration: BoxDecoration(
-                    color: theme.colorScheme.secondary.withOpacity(0.1),
-                    borderRadius: BorderRadius.circular(16),
+                    color: theme.colorScheme.secondary.withOpacity(0.13),
+                    borderRadius: BorderRadius.circular(20),
                   ),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
+                  child: Row(
                     children: [
-                      Row(
-                        children: [
-                          Icon(
-                            Icons.local_fire_department,
-                            color: theme.colorScheme.secondary,
-                          ),
-                          const SizedBox(width: 12),
-                          Text(
-                            'Constância',
-                            style: theme.textTheme.titleMedium?.copyWith(
-                              fontWeight: FontWeight.bold,
-                              color: theme.colorScheme.secondary,
-                            ),
-                          ),
-                        ],
+                      Icon(
+                        Icons.local_fire_department_rounded,
+                        color: theme.colorScheme.secondary,
+                        size: 32,
                       ),
-                      const SizedBox(height: 12),
+                      const SizedBox(width: 16),
                       Text(
-                        timerProvider.currentStreak > 0
-                            ? 'Você está estudando há ${timerProvider.currentStreak} dias seguidos! Continue assim!'
-                            : 'Comece a estudar hoje para iniciar sua sequência de estudos!',
-                        style: theme.textTheme.bodyMedium,
+                        'Constância: ',
+                        style: theme.textTheme.titleMedium?.copyWith(
+                          fontFamily: 'Segoe UI Light',
+                          fontWeight: FontWeight.w300,
+                          color: theme.colorScheme.secondary,
+                          fontSize: 18,
+                        ),
                       ),
-                      const SizedBox(height: 16),
-                      _buildStreakIndicator(context, timerProvider),
-                    ],
-                  ),
-                ),
-              ),
-              
-              const SizedBox(height: 24),
-              
-              // Tips section
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 24),
-                child: Container(
-                  padding: const EdgeInsets.all(20),
-                  decoration: BoxDecoration(
-                    color: theme.colorScheme.tertiary.withOpacity(0.1),
-                    borderRadius: BorderRadius.circular(16),
-                  ),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Row(
-                        children: [
-                          Icon(
-                            Icons.lightbulb_outline,
-                            color: theme.colorScheme.tertiary,
-                          ),
-                          const SizedBox(width: 12),
-                          Text(
-                            'Dica do dia',
-                            style: theme.textTheme.titleMedium?.copyWith(
-                              fontWeight: FontWeight.bold,
-                              color: theme.colorScheme.tertiary,
-                            ),
-                          ),
-                        ],
-                      ),
-                      const SizedBox(height: 12),
                       Text(
-                        'Use a técnica Pomodoro para melhorar seu foco: alterne 25 minutos de estudo com 5 minutos de pausa.',
-                        style: theme.textTheme.bodyMedium,
+                        '${timerProvider.currentStreak} dias',
+                        style: theme.textTheme.titleMedium?.copyWith(
+                          fontFamily: 'Segoe UI Light',
+                          fontWeight: FontWeight.w300,
+                          color: theme.colorScheme.secondary,
+                          fontSize: 18,
+                        ),
                       ),
                     ],
                   ),
                 ),
               ),
-              
-              const SizedBox(height: 24),
+              const SizedBox(height: 32),
             ],
           ),
         ),
+      ),
+      floatingActionButton: FloatingActionButton(
+        heroTag: 'fab_home',
+        onPressed: () => navigationProvider.setIndex(1),
+        child: Icon(Icons.play_arrow_rounded),
       ),
     );
   }
@@ -307,44 +354,6 @@ class HomeScreen extends StatelessWidget {
           ),
         ),
       ],
-    );
-  }
-  
-  Widget _buildQuickActionButton(
-    BuildContext context, {
-    required IconData icon,
-    required String label,
-    required Color color,
-    required VoidCallback onTap,
-  }) {
-    return Material(
-      color: color.withOpacity(0.1),
-      borderRadius: BorderRadius.circular(16),
-      child: InkWell(
-        onTap: onTap,
-        borderRadius: BorderRadius.circular(16),
-        child: Padding(
-          padding: const EdgeInsets.symmetric(vertical: 16),
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              Icon(
-                icon,
-                color: color,
-                size: 32,
-              ),
-              const SizedBox(height: 8),
-              Text(
-                label,
-                style: TextStyle(
-                  color: color,
-                  fontWeight: FontWeight.w600,
-                ),
-              ),
-            ],
-          ),
-        ),
-      ),
     );
   }
   
@@ -524,6 +533,74 @@ class HomeScreen extends StatelessWidget {
           ],
         );
       }),
+    );
+  }
+
+  String _motivationalMessage() {
+    final messages = [
+      'Você é incrível! ✨',
+      'Só mais uma sessão!',
+      'Foco total! 🚀',
+      'Estudar é poder!',
+      'Continue assim!',
+      'Orgulho de você!',
+      'Meta do dia: bater recorde!',
+      'Cada minuto conta!',
+      'Você está evoluindo!',
+      'Vamos juntos!',
+    ];
+    messages.shuffle();
+    return messages.first;
+  }
+
+  Widget _buildXPBar(BuildContext context, dynamic timerProvider) {
+    // Exemplo simples de barra de XP baseada em sessões
+    final totalSessions = timerProvider.studySessions.length;
+    final level = 1 + (totalSessions ~/ 10);
+    final xp = totalSessions % 10;
+    final percent = xp / 10.0;
+    final theme = Theme.of(context);
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Row(
+          children: [
+            Text('Nível $level', style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 14)),
+            const SizedBox(width: 8),
+            Icon(Icons.star_rounded, color: theme.colorScheme.secondary, size: 18),
+          ],
+        ),
+        const SizedBox(height: 4),
+        Stack(
+          children: [
+            Container(
+              height: 14,
+              width: 120,
+              decoration: BoxDecoration(
+                color: Colors.white.withOpacity(0.18),
+                borderRadius: BorderRadius.circular(8),
+              ),
+            ),
+            Container(
+              height: 14,
+              width: 120.0 * percent.toDouble(),
+              decoration: BoxDecoration(
+                color: theme.colorScheme.secondary,
+                borderRadius: BorderRadius.circular(8),
+                boxShadow: [
+                  BoxShadow(
+                    color: theme.colorScheme.secondary.withOpacity(0.4),
+                    blurRadius: 6,
+                    offset: Offset(0, 2),
+                  ),
+                ],
+              ),
+            ),
+          ],
+        ),
+        const SizedBox(height: 2),
+        Text('${(percent * 100).toInt()}% para o próximo nível', style: TextStyle(color: Colors.white, fontSize: 11)),
+      ],
     );
   }
 } 

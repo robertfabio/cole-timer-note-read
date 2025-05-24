@@ -1,10 +1,10 @@
 {
     "logs": [
         {
-            "outputFile": "com.coleapp.cole_app_flutter.app-mergeDebugResources-40:/values-night-v8/values-night-v8.xml",
+            "outputFile": "com.coleapp.cole_app_flutter.app-mergeDebugResources-41:/values-night-v8/values-night-v8.xml",
             "map": [
                 {
-                    "source": "/home/fabio/Projetcs/cole_app_flutter/android/app/src/main/res/values-night/styles.xml",
+                    "source": "/home/fabio/Projetcs/cole-timer-note-read/android/app/src/main/res/values-night/styles.xml",
                     "from": {
                         "startLines": "3,14",
                         "startColumns": "4,4",

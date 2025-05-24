@@ -72,6 +72,7 @@ class TimerScreen extends StatelessWidget {
       ),
       floatingActionButton: canSave && !timerProvider.isRunning
           ? FloatingActionButton(
+              heroTag: 'fab_timer',
               onPressed: () {
                 Navigator.push(
                   context,
@@ -200,6 +201,24 @@ class TimerScreen extends StatelessWidget {
             ],
           ),
         ),
+      ),
+    );
+  }
+
+  void _showPomodoroComplete(BuildContext context) {
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: Row(
+          children: [
+            Icon(Icons.emoji_events_rounded, color: Theme.of(context).colorScheme.secondary, size: 28),
+            SizedBox(width: 12),
+            Expanded(child: Text('Parabéns! Pomodoro concluído! 🎉')),
+          ],
+        ),
+        backgroundColor: Theme.of(context).colorScheme.secondary,
+        behavior: SnackBarBehavior.floating,
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+        duration: Duration(seconds: 3),
       ),
     );
   }

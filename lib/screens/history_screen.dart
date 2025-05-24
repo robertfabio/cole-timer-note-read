@@ -228,4 +228,22 @@ class HistoryScreen extends StatelessWidget {
       ),
     );
   }
+
+  void _showSessionDeleted(BuildContext context) {
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: Row(
+          children: [
+            Icon(Icons.delete_rounded, color: Theme.of(context).colorScheme.error, size: 28),
+            SizedBox(width: 12),
+            Expanded(child: Text('Sessão excluída!')),
+          ],
+        ),
+        backgroundColor: Theme.of(context).colorScheme.surface,
+        behavior: SnackBarBehavior.floating,
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+        duration: Duration(seconds: 2),
+      ),
+    );
+  }
 } 

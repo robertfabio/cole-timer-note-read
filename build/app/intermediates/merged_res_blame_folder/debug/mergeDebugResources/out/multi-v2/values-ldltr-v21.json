@@ -1,7 +1,7 @@
 {
     "logs": [
         {
-            "outputFile": "com.coleapp.cole_app_flutter.app-mergeDebugResources-40:/values-ldltr-v21/values-ldltr-v21.xml",
+            "outputFile": "com.coleapp.cole_app_flutter.app-mergeDebugResources-41:/values-ldltr-v21/values-ldltr-v21.xml",
             "map": [
                 {
                     "source": "/home/fabio/.gradle/caches/8.10.2/transforms/845d779a6f9703b804f5e43452bcc2e5/transformed/appcompat-1.1.0/res/values-ldltr-v21/values-ldltr-v21.xml",

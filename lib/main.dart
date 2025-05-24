@@ -14,14 +14,19 @@ import 'screens/stats_screen.dart';
 import 'screens/notes_screen.dart';
 import 'screens/settings_screen.dart';
 import 'screens/notifications_screen.dart';
+import 'screens/reading_screen.dart';
 import 'services/notification_service.dart';
+import 'package:permission_handler/permission_handler.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   
+  // Pedir permissão de notificação (Android 13+)
+  await Permission.notification.request();
+  
   // Initialize notification service
-  await NotificationService.init();
-  await NotificationService.requestPermissions();
+  final notificationService = NotificationService();
+  await notificationService.initialize();
   
   // Set preferred orientations
   await SystemChrome.setPreferredOrientations([
@@ -50,27 +55,65 @@ class MyApp extends StatelessWidget {
   }
 }
 
-class AppWithTheme extends StatelessWidget {
+class AppWithTheme extends StatefulWidget {
   const AppWithTheme({Key? key}) : super(key: key);
+
+  @override
+  State<AppWithTheme> createState() => _AppWithThemeState();
+}
+
+class _AppWithThemeState extends State<AppWithTheme> with WidgetsBindingObserver {
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addObserver(this);
+  }
+
+  @override
+  void dispose() {
+    WidgetsBinding.instance.removeObserver(this);
+    super.dispose();
+  }
+
+  @override
+  void didChangeAppLifecycleState(AppLifecycleState state) async {
+    if (state == AppLifecycleState.paused) {
+      // App foi para background
+      final timerProvider = Provider.of<TimerProvider>(context, listen: false);
+      if (timerProvider.isRunning || timerProvider.isPomodoroActive) {
+        final notificationService = NotificationService();
+        String title = 'Cronômetro em andamento';
+        String body = 'Seu timer ou pomodoro está rodando. Volte para não perder o foco!';
+        if (timerProvider.timerMode == TimerMode.shortBreak || timerProvider.timerMode == TimerMode.longBreak) {
+          title = 'Pausa em andamento';
+          body = 'Sua pausa está rolando. O app avisará quando terminar!';
+        }
+        await notificationService.showNotification(
+          title: title,
+          body: body,
+        );
+      }
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
     final themeProvider = Provider.of<ThemeProvider>(context);
-    
     return MaterialApp(
       title: 'Cole',
       debugShowCheckedModeBanner: false,
       theme: AppTheme.getLightTheme(),
       darkTheme: AppTheme.getDarkTheme(),
       themeMode: themeProvider.themeMode,
-      initialRoute: '/',
+      home: const SplashScreen(),
       routes: {
-        '/': (context) => const MainScreen(),
+        '/main': (context) => const MainScreen(),
         '/timer': (context) => const TimerScreen(),
         '/notes': (context) => const NotesScreen(),
         '/stats': (context) => const StatsScreen(),
         '/settings': (context) => const SettingsScreen(),
         '/notifications': (context) => const NotificationsScreen(),
+        '/reading': (context) => const ReadingScreen(),
       },
     );
   }
@@ -86,6 +129,7 @@ class SplashScreen extends StatefulWidget {
 class _SplashScreenState extends State<SplashScreen> with SingleTickerProviderStateMixin {
   late AnimationController _controller;
   late Animation<double> _fadeAnimation;
+  late Animation<double> _scaleAnimation;
 
   @override
   void initState() {
@@ -102,16 +146,18 @@ class _SplashScreenState extends State<SplashScreen> with SingleTickerProviderSt
         curve: Curves.easeIn,
       ),
     );
+    _scaleAnimation = Tween<double>(begin: 0.8, end: 1.1).animate(
+      CurvedAnimation(
+        parent: _controller,
+        curve: Curves.elasticOut,
+      ),
+    );
     
     _controller.forward();
     
-    // Navigate to home screen after animation
-    _controller.addStatusListener((status) {
-      if (status == AnimationStatus.completed) {
-        Navigator.of(context).pushReplacement(
-          MaterialPageRoute(builder: (_) => const MainScreen()),
-        );
-      }
+    // Navegar para a MainScreen após animação
+    Future.delayed(const Duration(seconds: 2), () {
+      Navigator.of(context).pushReplacementNamed('/main');
     });
   }
 
@@ -130,34 +176,65 @@ class _SplashScreenState extends State<SplashScreen> with SingleTickerProviderSt
       body: Center(
         child: FadeTransition(
           opacity: _fadeAnimation,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Icon(
-                Icons.timer,
-                size: 120,
-                color: Colors.white,
-              ),
-              const SizedBox(height: 32),
-              Text(
-                'Cole',
-                style: TextStyle(
-                  fontFamily: 'Montserrat',
-                  fontSize: 40,
-                  fontWeight: FontWeight.bold,
-                  color: Colors.white,
+          child: ScaleTransition(
+            scale: _scaleAnimation,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                // Ícone cartoon
+                Container(
+                  decoration: BoxDecoration(
+                    color: theme.colorScheme.secondary.withOpacity(0.15),
+                    shape: BoxShape.circle,
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.black12,
+                        blurRadius: 16,
+                        offset: Offset(0, 8),
+                      ),
+                    ],
+                  ),
+                  padding: const EdgeInsets.all(32),
+                  child: Icon(
+                    Icons.timer_rounded,
+                    size: 100,
+                    color: theme.colorScheme.onPrimary,
+                  ),
                 ),
-              ),
-              const SizedBox(height: 16),
-              Text(
-                'Produtividade & Foco',
-                style: TextStyle(
-                  fontFamily: 'Montserrat',
-                  fontSize: 18,
-                  color: Colors.white.withOpacity(0.9),
+                const SizedBox(height: 32),
+                Text(
+                  'Cole',
+                  style: TextStyle(
+                    fontFamily: 'Segoe UI Light',
+                    fontSize: 44,
+                    fontWeight: FontWeight.w300,
+                    color: Colors.white,
+                    letterSpacing: 2,
+                    shadows: [
+                      Shadow(
+                        color: Colors.black26,
+                        blurRadius: 8,
+                        offset: Offset(0, 2),
+                      ),
+                    ],
+                  ),
                 ),
-              ),
-            ],
+                const SizedBox(height: 16),
+                Text(
+                  'Produtividade & Foco',
+                  style: TextStyle(
+                    fontFamily: 'Segoe UI Light',
+                    fontSize: 20,
+                    color: Colors.white.withOpacity(0.92),
+                  ),
+                ),
+                const SizedBox(height: 32),
+                CircularProgressIndicator(
+                  valueColor: AlwaysStoppedAnimation<Color>(theme.colorScheme.secondary),
+                  strokeWidth: 4,
+                ),
+              ],
+            ),
           ),
         ),
       ),

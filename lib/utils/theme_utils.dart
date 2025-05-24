@@ -3,21 +3,23 @@ import 'package:google_fonts/google_fonts.dart';
 
 class AppTheme {
   // Paleta de cores aconchegantes com fundo branco
-  static const Color primaryColorLight = Color(0xFFE4A951); // Amarelo aconchegante
-  static const Color secondaryColorLight = Color(0xFFE78F8E); // Rosa suave
-  static const Color accentColorLight = Color(0xFF81B29A); // Verde menta
-  static const Color neutralColorLight = Color(0xFFF7F5F2); // Bege muito claro
+  static const Color primaryColorLight = Color(0xFF7C3AED); // Roxo vibrante
+  static const Color secondaryColorLight = Color(0xFF38BDF8); // Azul piscina
+  static const Color accentColorLight = Color(0xFFFDE047); // Amarelo pastel
+  static const Color neutralColorLight = Color(0xFFF8FAFC); // Branco gelo
+  static const Color successColorLight = Color(0xFF4ADE80); // Verde limão
   
-  static const Color primaryColorDark = Color(0xFFEAB76A); // Amarelo mais suave para tema escuro
-  static const Color secondaryColorDark = Color(0xFFEA9E9E); // Rosa suave para tema escuro
-  static const Color accentColorDark = Color(0xFF92C5AD); // Verde menta para tema escuro
-  static const Color neutralColorDark = Color(0xFF2A2926); // Cinza escuro com tom quente
+  static const Color primaryColorDark = Color(0xFF6D28D9); // Roxo escuro
+  static const Color secondaryColorDark = Color(0xFF0EA5E9); // Azul piscina escuro
+  static const Color accentColorDark = Color(0xFFFACC15); // Amarelo pastel escuro
+  static const Color neutralColorDark = Color(0xFF1E293B); // Azul escuro
+  static const Color successColorDark = Color(0xFF22D3EE); // Azul claro
   
-  static const Color backgroundColorLight = Color(0xFFFFFFFF); // Branco puro
-  static const Color backgroundColorDark = Color(0xFF1D1C1A); // Quase preto com tom quente
+  static const Color backgroundColorLight = Color(0xFFF8FAFC); // Branco gelo
+  static const Color backgroundColorDark = Color(0xFF1E293B); // Azul escuro
   static const Color surfaceColorLight = Color(0xFFFFFFFF); // Branco
-  static const Color surfaceColorDark = Color(0xFF242321); // Cinza escuro com tom quente
-  static const Color errorColor = Color(0xFFE57373); // Vermelho suave
+  static const Color surfaceColorDark = Color(0xFF334155); // Azul cinza escuro
+  static const Color errorColor = Color(0xFFFB7185); // Coral
 
   static ThemeData getLightTheme() {
     return _getTheme(
@@ -83,9 +85,9 @@ class AppTheme {
         centerTitle: true,
         iconTheme: IconThemeData(color: primaryColor),
         titleTextStyle: TextStyle(
-          fontFamily: 'Montserrat',
+          fontFamily: 'Segoe UI Light',
           color: isDark ? Colors.white : Colors.black87,
-          fontWeight: FontWeight.w600,
+          fontWeight: FontWeight.w300,
           fontSize: 18,
         ),
       ),
@@ -173,7 +175,7 @@ class AppTheme {
         contentPadding: EdgeInsets.symmetric(horizontal: 16, vertical: 16),
       ),
       textTheme: _getTextTheme(brightness),
-      fontFamily: 'Montserrat',
+      fontFamily: 'Segoe UI Light',
       visualDensity: VisualDensity.adaptivePlatformDensity,
     );
   }
@@ -183,52 +185,61 @@ class AppTheme {
     final baseTextColor = isDark ? Colors.white : Colors.black87;
     
     return TextTheme(
-      displayLarge: GoogleFonts.montserrat(
+      displayLarge: TextStyle(
+        fontFamily: 'Segoe UI Light',
         fontSize: 32,
-        fontWeight: FontWeight.w700,
+        fontWeight: FontWeight.w300,
         color: baseTextColor,
         letterSpacing: -0.5,
       ),
-      displayMedium: GoogleFonts.montserrat(
+      displayMedium: TextStyle(
+        fontFamily: 'Segoe UI Light',
         fontSize: 28,
-        fontWeight: FontWeight.w600,
+        fontWeight: FontWeight.w300,
         color: baseTextColor,
         letterSpacing: -0.5,
       ),
-      displaySmall: GoogleFonts.montserrat(
+      displaySmall: TextStyle(
+        fontFamily: 'Segoe UI Light',
         fontSize: 24,
-        fontWeight: FontWeight.w600,
+        fontWeight: FontWeight.w300,
         color: baseTextColor,
         letterSpacing: -0.25,
       ),
-      headlineMedium: GoogleFonts.montserrat(
+      headlineMedium: TextStyle(
+        fontFamily: 'Segoe UI Light',
         fontSize: 20,
-        fontWeight: FontWeight.w600,
+        fontWeight: FontWeight.w300,
         color: baseTextColor,
       ),
-      titleLarge: GoogleFonts.montserrat(
+      titleLarge: TextStyle(
+        fontFamily: 'Segoe UI Light',
         fontSize: 18,
-        fontWeight: FontWeight.w600,
+        fontWeight: FontWeight.w300,
         color: baseTextColor,
       ),
-      titleMedium: GoogleFonts.montserrat(
+      titleMedium: TextStyle(
+        fontFamily: 'Segoe UI Light',
         fontSize: 16,
-        fontWeight: FontWeight.w500,
+        fontWeight: FontWeight.w300,
         color: baseTextColor,
       ),
-      bodyLarge: GoogleFonts.montserrat(
+      bodyLarge: TextStyle(
+        fontFamily: 'Segoe UI Light',
         fontSize: 16,
         color: baseTextColor,
         letterSpacing: 0.15,
       ),
-      bodyMedium: GoogleFonts.montserrat(
+      bodyMedium: TextStyle(
+        fontFamily: 'Segoe UI Light',
         fontSize: 14,
         color: baseTextColor,
         letterSpacing: 0.15,
       ),
-      labelLarge: GoogleFonts.montserrat(
+      labelLarge: TextStyle(
+        fontFamily: 'Segoe UI Light',
         fontSize: 14,
-        fontWeight: FontWeight.w500,
+        fontWeight: FontWeight.w300,
         color: baseTextColor,
         letterSpacing: 0.1,
       ),

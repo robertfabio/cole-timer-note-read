@@ -190,7 +190,7 @@ class NotificationsProvider extends ChangeNotifier {
 
     // Dispara notificação real do sistema para tipos relevantes
     if (type == 'reminder' || type == 'achievement' || type == 'streak') {
-      NotificationService.showNotification(title: title, body: message);
+      NotificationService().showNotification(title: title, body: message);
     }
   }
 

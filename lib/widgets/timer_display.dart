@@ -54,7 +54,7 @@ class TimerDisplay extends StatelessWidget {
                 fontSize: textSize,
                     fontWeight: FontWeight.w300,
                 color: theme.colorScheme.onBackground,
-                fontFamily: 'Montserrat',
+                fontFamily: 'Segoe UI Light',
                     letterSpacing: -1.0,
                   ),
                 ),

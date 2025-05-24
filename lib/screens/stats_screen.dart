@@ -673,4 +673,22 @@ class _StatsScreenState extends State<StatsScreen> with SingleTickerProviderStat
       ),
     );
   }
+
+  void _showGoalAchieved(BuildContext context, String meta) {
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: Row(
+          children: [
+            Icon(Icons.emoji_events_rounded, color: Theme.of(context).colorScheme.secondary, size: 28),
+            SizedBox(width: 12),
+            Expanded(child: Text('Meta $meta batida! Continue assim!')),
+          ],
+        ),
+        backgroundColor: Theme.of(context).colorScheme.tertiary,
+        behavior: SnackBarBehavior.floating,
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+        duration: Duration(seconds: 3),
+      ),
+    );
+  }
 } 

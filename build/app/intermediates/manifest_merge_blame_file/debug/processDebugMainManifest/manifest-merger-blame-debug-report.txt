@@ -13,161 +13,240 @@
 13         to allow setting breakpoints, to provide hot reload, etc.
 14    -->
 15    <uses-permission android:name="android.permission.INTERNET" />
-15-->/home/fabio/Projetcs/cole_app_flutter/android/app/src/debug/AndroidManifest.xml:6:5-66
-15-->/home/fabio/Projetcs/cole_app_flutter/android/app/src/debug/AndroidManifest.xml:6:22-64
-16    <!--
-17     Required to query activities that can process text, see:
-18         https://developer.android.com/training/package-visibility and
-19         https://developer.android.com/reference/android/content/Intent#ACTION_PROCESS_TEXT.
-20
-21         In particular, this is used by the Flutter engine in io.flutter.plugin.text.ProcessTextPlugin.
-22    -->
-23    <queries>
-23-->/home/fabio/Projetcs/cole_app_flutter/android/app/src/main/AndroidManifest.xml:39:5-44:15
-24        <intent>
-24-->/home/fabio/Projetcs/cole_app_flutter/android/app/src/main/AndroidManifest.xml:40:9-43:18
-25            <action android:name="android.intent.action.PROCESS_TEXT" />
-25-->/home/fabio/Projetcs/cole_app_flutter/android/app/src/main/AndroidManifest.xml:41:13-72
-25-->/home/fabio/Projetcs/cole_app_flutter/android/app/src/main/AndroidManifest.xml:41:21-70
-26
-27            <data android:mimeType="text/plain" />
-27-->/home/fabio/Projetcs/cole_app_flutter/android/app/src/main/AndroidManifest.xml:42:13-50
-27-->/home/fabio/Projetcs/cole_app_flutter/android/app/src/main/AndroidManifest.xml:42:19-48
-28        </intent>
-29    </queries>
-30
-31    <uses-permission android:name="android.permission.VIBRATE" />
-31-->[:flutter_local_notifications] /home/fabio/Projetcs/cole_app_flutter/build/flutter_local_notifications/intermediates/merged_manifest/debug/processDebugManifest/AndroidManifest.xml:7:5-66
-31-->[:flutter_local_notifications] /home/fabio/Projetcs/cole_app_flutter/build/flutter_local_notifications/intermediates/merged_manifest/debug/processDebugManifest/AndroidManifest.xml:7:22-63
-32    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
-32-->[:flutter_local_notifications] /home/fabio/Projetcs/cole_app_flutter/build/flutter_local_notifications/intermediates/merged_manifest/debug/processDebugManifest/AndroidManifest.xml:8:5-77
-32-->[:flutter_local_notifications] /home/fabio/Projetcs/cole_app_flutter/build/flutter_local_notifications/intermediates/merged_manifest/debug/processDebugManifest/AndroidManifest.xml:8:22-74
-33
-34    <permission
-34-->[androidx.core:core:1.13.1] /home/fabio/.gradle/caches/8.10.2/transforms/dfc2fbca530748e569b0737b09fa016f/transformed/core-1.13.1/AndroidManifest.xml:22:5-24:47
-35        android:name="com.coleapp.cole_app_flutter.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION"
-35-->[androidx.core:core:1.13.1] /home/fabio/.gradle/caches/8.10.2/transforms/dfc2fbca530748e569b0737b09fa016f/transformed/core-1.13.1/AndroidManifest.xml:23:9-81
-36        android:protectionLevel="signature" />
-36-->[androidx.core:core:1.13.1] /home/fabio/.gradle/caches/8.10.2/transforms/dfc2fbca530748e569b0737b09fa016f/transformed/core-1.13.1/AndroidManifest.xml:24:9-44
+15-->/home/fabio/Projetcs/cole-timer-note-read/android/app/src/debug/AndroidManifest.xml:6:5-66
+15-->/home/fabio/Projetcs/cole-timer-note-read/android/app/src/debug/AndroidManifest.xml:6:22-64
+16    <!-- Add permissions for notifications -->
+17    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+17-->/home/fabio/Projetcs/cole-timer-note-read/android/app/src/main/AndroidManifest.xml:3:5-80
+17-->/home/fabio/Projetcs/cole-timer-note-read/android/app/src/main/AndroidManifest.xml:3:22-78
+18    <uses-permission android:name="android.permission.VIBRATE" />
+18-->/home/fabio/Projetcs/cole-timer-note-read/android/app/src/main/AndroidManifest.xml:4:5-66
+18-->/home/fabio/Projetcs/cole-timer-note-read/android/app/src/main/AndroidManifest.xml:4:22-63
+19    <uses-permission android:name="android.permission.USE_FULL_SCREEN_INTENT" />
+19-->/home/fabio/Projetcs/cole-timer-note-read/android/app/src/main/AndroidManifest.xml:5:5-81
+19-->/home/fabio/Projetcs/cole-timer-note-read/android/app/src/main/AndroidManifest.xml:5:22-78
+20    <uses-permission android:name="android.permission.SCHEDULE_EXACT_ALARM" />
+20-->/home/fabio/Projetcs/cole-timer-note-read/android/app/src/main/AndroidManifest.xml:6:5-79
+20-->/home/fabio/Projetcs/cole-timer-note-read/android/app/src/main/AndroidManifest.xml:6:22-76
+21    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
+21-->/home/fabio/Projetcs/cole-timer-note-read/android/app/src/main/AndroidManifest.xml:7:5-76
+21-->/home/fabio/Projetcs/cole-timer-note-read/android/app/src/main/AndroidManifest.xml:7:22-74
+22    <uses-permission
+22-->/home/fabio/Projetcs/cole-timer-note-read/android/app/src/main/AndroidManifest.xml:8:5-107
+23        android:name="android.permission.READ_EXTERNAL_STORAGE"
+23-->/home/fabio/Projetcs/cole-timer-note-read/android/app/src/main/AndroidManifest.xml:8:22-77
+24        android:maxSdkVersion="32" />
+24-->/home/fabio/Projetcs/cole-timer-note-read/android/app/src/main/AndroidManifest.xml:8:78-104
+25    <uses-permission
+25-->/home/fabio/Projetcs/cole-timer-note-read/android/app/src/main/AndroidManifest.xml:9:5-108
+26        android:name="android.permission.WRITE_EXTERNAL_STORAGE"
+26-->/home/fabio/Projetcs/cole-timer-note-read/android/app/src/main/AndroidManifest.xml:9:22-78
+27        android:maxSdkVersion="32" />
+27-->/home/fabio/Projetcs/cole-timer-note-read/android/app/src/main/AndroidManifest.xml:9:79-105
+28    <uses-permission android:name="android.permission.READ_MEDIA_IMAGES" />
+28-->/home/fabio/Projetcs/cole-timer-note-read/android/app/src/main/AndroidManifest.xml:10:5-76
+28-->/home/fabio/Projetcs/cole-timer-note-read/android/app/src/main/AndroidManifest.xml:10:22-73
+29    <uses-permission android:name="android.permission.READ_MEDIA_VIDEO" />
+29-->/home/fabio/Projetcs/cole-timer-note-read/android/app/src/main/AndroidManifest.xml:11:5-75
+29-->/home/fabio/Projetcs/cole-timer-note-read/android/app/src/main/AndroidManifest.xml:11:22-72
+30    <uses-permission android:name="android.permission.READ_MEDIA_AUDIO" />
+30-->/home/fabio/Projetcs/cole-timer-note-read/android/app/src/main/AndroidManifest.xml:12:5-75
+30-->/home/fabio/Projetcs/cole-timer-note-read/android/app/src/main/AndroidManifest.xml:12:22-72
+31    <uses-permission android:name="android.permission.READ_MEDIA_DOCUMENTS" /> <!-- Permissão ampla para Android 11+ -->
+31-->/home/fabio/Projetcs/cole-timer-note-read/android/app/src/main/AndroidManifest.xml:13:5-79
+31-->/home/fabio/Projetcs/cole-timer-note-read/android/app/src/main/AndroidManifest.xml:13:22-76
+32    <uses-permission android:name="android.permission.MANAGE_EXTERNAL_STORAGE" />
+32-->/home/fabio/Projetcs/cole-timer-note-read/android/app/src/main/AndroidManifest.xml:15:5-82
+32-->/home/fabio/Projetcs/cole-timer-note-read/android/app/src/main/AndroidManifest.xml:15:22-79
+33    <!--
+34 Required to query activities that can process text, see:
+35         https://developer.android.com/training/package-visibility and
+36         https://developer.android.com/reference/android/content/Intent#ACTION_PROCESS_TEXT.
 37
-38    <uses-permission android:name="com.coleapp.cole_app_flutter.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION" />
-38-->[androidx.core:core:1.13.1] /home/fabio/.gradle/caches/8.10.2/transforms/dfc2fbca530748e569b0737b09fa016f/transformed/core-1.13.1/AndroidManifest.xml:26:5-97
-38-->[androidx.core:core:1.13.1] /home/fabio/.gradle/caches/8.10.2/transforms/dfc2fbca530748e569b0737b09fa016f/transformed/core-1.13.1/AndroidManifest.xml:26:22-94
-39
-40    <application
-41        android:name="android.app.Application"
-42        android:appComponentFactory="androidx.core.app.CoreComponentFactory"
-42-->[androidx.core:core:1.13.1] /home/fabio/.gradle/caches/8.10.2/transforms/dfc2fbca530748e569b0737b09fa016f/transformed/core-1.13.1/AndroidManifest.xml:28:18-86
-43        android:debuggable="true"
-44        android:extractNativeLibs="true"
-45        android:icon="@mipmap/launcher_icon"
-46        android:label="cole_app_flutter" >
-47        <activity
-48            android:name="com.coleapp.cole_app_flutter.MainActivity"
-49            android:configChanges="orientation|keyboardHidden|keyboard|screenSize|smallestScreenSize|locale|layoutDirection|fontScale|screenLayout|density|uiMode"
-50            android:exported="true"
-51            android:hardwareAccelerated="true"
-52            android:launchMode="singleTop"
-53            android:taskAffinity=""
-54            android:theme="@style/LaunchTheme"
-55            android:windowSoftInputMode="adjustResize" >
+38         In particular, this is used by the Flutter engine in io.flutter.plugin.text.ProcessTextPlugin.
+39    -->
+40    <queries>
+40-->/home/fabio/Projetcs/cole-timer-note-read/android/app/src/main/AndroidManifest.xml:77:5-82:15
+41        <intent>
+41-->/home/fabio/Projetcs/cole-timer-note-read/android/app/src/main/AndroidManifest.xml:78:9-81:18
+42            <action android:name="android.intent.action.PROCESS_TEXT" />
+42-->/home/fabio/Projetcs/cole-timer-note-read/android/app/src/main/AndroidManifest.xml:79:13-72
+42-->/home/fabio/Projetcs/cole-timer-note-read/android/app/src/main/AndroidManifest.xml:79:21-70
+43
+44            <data android:mimeType="text/plain" />
+44-->/home/fabio/Projetcs/cole-timer-note-read/android/app/src/main/AndroidManifest.xml:80:13-50
+44-->/home/fabio/Projetcs/cole-timer-note-read/android/app/src/main/AndroidManifest.xml:80:19-48
+45        </intent>
+46        <intent>
+46-->[:file_picker] /home/fabio/Projetcs/cole-timer-note-read/build/file_picker/intermediates/merged_manifest/debug/processDebugManifest/AndroidManifest.xml:8:9-12:18
+47            <action android:name="android.intent.action.GET_CONTENT" />
+47-->[:file_picker] /home/fabio/Projetcs/cole-timer-note-read/build/file_picker/intermediates/merged_manifest/debug/processDebugManifest/AndroidManifest.xml:9:13-72
+47-->[:file_picker] /home/fabio/Projetcs/cole-timer-note-read/build/file_picker/intermediates/merged_manifest/debug/processDebugManifest/AndroidManifest.xml:9:21-69
+48
+49            <data android:mimeType="*/*" />
+49-->/home/fabio/Projetcs/cole-timer-note-read/android/app/src/main/AndroidManifest.xml:80:13-50
+49-->/home/fabio/Projetcs/cole-timer-note-read/android/app/src/main/AndroidManifest.xml:80:19-48
+50        </intent>
+51    </queries>
+52
+53    <permission
+53-->[androidx.core:core:1.15.0] /home/fabio/.gradle/caches/8.10.2/transforms/68e16af6c15662845d99d29588edd163/transformed/core-1.15.0/AndroidManifest.xml:22:5-24:47
+54        android:name="com.coleapp.cole_app_flutter.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION"
+54-->[androidx.core:core:1.15.0] /home/fabio/.gradle/caches/8.10.2/transforms/68e16af6c15662845d99d29588edd163/transformed/core-1.15.0/AndroidManifest.xml:23:9-81
+55        android:protectionLevel="signature" />
+55-->[androidx.core:core:1.15.0] /home/fabio/.gradle/caches/8.10.2/transforms/68e16af6c15662845d99d29588edd163/transformed/core-1.15.0/AndroidManifest.xml:24:9-44
 56
-57            <!--
-58                 Specifies an Android theme to apply to this Activity as soon as
-59                 the Android process has started. This theme is visible to the user
-60                 while the Flutter UI initializes. After that, this theme continues
-61                 to determine the Window background behind the Flutter UI.
-62            -->
-63            <meta-data
-64                android:name="io.flutter.embedding.android.NormalTheme"
-65                android:resource="@style/NormalTheme" />
-66
-67            <intent-filter>
-68                <action android:name="android.intent.action.MAIN" />
-69
-70                <category android:name="android.intent.category.LAUNCHER" />
-71            </intent-filter>
-72        </activity>
-73        <!--
-74             Don't delete the meta-data below.
-75             This is used by the Flutter tool to generate GeneratedPluginRegistrant.java
-76        -->
-77        <meta-data
-78            android:name="flutterEmbedding"
-79            android:value="2" />
-80
-81        <uses-library
-81-->[androidx.window:window:1.2.0] /home/fabio/.gradle/caches/8.10.2/transforms/aed2861b2b6894f7067df3f3f96b791f/transformed/jetified-window-1.2.0/AndroidManifest.xml:23:9-25:40
-82            android:name="androidx.window.extensions"
-82-->[androidx.window:window:1.2.0] /home/fabio/.gradle/caches/8.10.2/transforms/aed2861b2b6894f7067df3f3f96b791f/transformed/jetified-window-1.2.0/AndroidManifest.xml:24:13-54
-83            android:required="false" />
-83-->[androidx.window:window:1.2.0] /home/fabio/.gradle/caches/8.10.2/transforms/aed2861b2b6894f7067df3f3f96b791f/transformed/jetified-window-1.2.0/AndroidManifest.xml:25:13-37
-84        <uses-library
-84-->[androidx.window:window:1.2.0] /home/fabio/.gradle/caches/8.10.2/transforms/aed2861b2b6894f7067df3f3f96b791f/transformed/jetified-window-1.2.0/AndroidManifest.xml:26:9-28:40
-85            android:name="androidx.window.sidecar"
-85-->[androidx.window:window:1.2.0] /home/fabio/.gradle/caches/8.10.2/transforms/aed2861b2b6894f7067df3f3f96b791f/transformed/jetified-window-1.2.0/AndroidManifest.xml:27:13-51
-86            android:required="false" />
-86-->[androidx.window:window:1.2.0] /home/fabio/.gradle/caches/8.10.2/transforms/aed2861b2b6894f7067df3f3f96b791f/transformed/jetified-window-1.2.0/AndroidManifest.xml:28:13-37
-87
-88        <provider
-88-->[androidx.lifecycle:lifecycle-process:2.7.0] /home/fabio/.gradle/caches/8.10.2/transforms/bb10008c4b33ee9597583412a41828ed/transformed/jetified-lifecycle-process-2.7.0/AndroidManifest.xml:24:9-32:20
-89            android:name="androidx.startup.InitializationProvider"
-89-->[androidx.lifecycle:lifecycle-process:2.7.0] /home/fabio/.gradle/caches/8.10.2/transforms/bb10008c4b33ee9597583412a41828ed/transformed/jetified-lifecycle-process-2.7.0/AndroidManifest.xml:25:13-67
-90            android:authorities="com.coleapp.cole_app_flutter.androidx-startup"
-90-->[androidx.lifecycle:lifecycle-process:2.7.0] /home/fabio/.gradle/caches/8.10.2/transforms/bb10008c4b33ee9597583412a41828ed/transformed/jetified-lifecycle-process-2.7.0/AndroidManifest.xml:26:13-68
-91            android:exported="false" >
-91-->[androidx.lifecycle:lifecycle-process:2.7.0] /home/fabio/.gradle/caches/8.10.2/transforms/bb10008c4b33ee9597583412a41828ed/transformed/jetified-lifecycle-process-2.7.0/AndroidManifest.xml:27:13-37
-92            <meta-data
-92-->[androidx.lifecycle:lifecycle-process:2.7.0] /home/fabio/.gradle/caches/8.10.2/transforms/bb10008c4b33ee9597583412a41828ed/transformed/jetified-lifecycle-process-2.7.0/AndroidManifest.xml:29:13-31:52
-93                android:name="androidx.lifecycle.ProcessLifecycleInitializer"
-93-->[androidx.lifecycle:lifecycle-process:2.7.0] /home/fabio/.gradle/caches/8.10.2/transforms/bb10008c4b33ee9597583412a41828ed/transformed/jetified-lifecycle-process-2.7.0/AndroidManifest.xml:30:17-78
-94                android:value="androidx.startup" />
-94-->[androidx.lifecycle:lifecycle-process:2.7.0] /home/fabio/.gradle/caches/8.10.2/transforms/bb10008c4b33ee9597583412a41828ed/transformed/jetified-lifecycle-process-2.7.0/AndroidManifest.xml:31:17-49
-95            <meta-data
-95-->[androidx.profileinstaller:profileinstaller:1.3.1] /home/fabio/.gradle/caches/8.10.2/transforms/5aacd87baa6feaa7bece87b01e7698f0/transformed/jetified-profileinstaller-1.3.1/AndroidManifest.xml:29:13-31:52
-96                android:name="androidx.profileinstaller.ProfileInstallerInitializer"
-96-->[androidx.profileinstaller:profileinstaller:1.3.1] /home/fabio/.gradle/caches/8.10.2/transforms/5aacd87baa6feaa7bece87b01e7698f0/transformed/jetified-profileinstaller-1.3.1/AndroidManifest.xml:30:17-85
-97                android:value="androidx.startup" />
-97-->[androidx.profileinstaller:profileinstaller:1.3.1] /home/fabio/.gradle/caches/8.10.2/transforms/5aacd87baa6feaa7bece87b01e7698f0/transformed/jetified-profileinstaller-1.3.1/AndroidManifest.xml:31:17-49
-98        </provider>
-99
-100        <receiver
-100-->[androidx.profileinstaller:profileinstaller:1.3.1] /home/fabio/.gradle/caches/8.10.2/transforms/5aacd87baa6feaa7bece87b01e7698f0/transformed/jetified-profileinstaller-1.3.1/AndroidManifest.xml:34:9-52:20
-101            android:name="androidx.profileinstaller.ProfileInstallReceiver"
-101-->[androidx.profileinstaller:profileinstaller:1.3.1] /home/fabio/.gradle/caches/8.10.2/transforms/5aacd87baa6feaa7bece87b01e7698f0/transformed/jetified-profileinstaller-1.3.1/AndroidManifest.xml:35:13-76
-102            android:directBootAware="false"
-102-->[androidx.profileinstaller:profileinstaller:1.3.1] /home/fabio/.gradle/caches/8.10.2/transforms/5aacd87baa6feaa7bece87b01e7698f0/transformed/jetified-profileinstaller-1.3.1/AndroidManifest.xml:36:13-44
-103            android:enabled="true"
-103-->[androidx.profileinstaller:profileinstaller:1.3.1] /home/fabio/.gradle/caches/8.10.2/transforms/5aacd87baa6feaa7bece87b01e7698f0/transformed/jetified-profileinstaller-1.3.1/AndroidManifest.xml:37:13-35
-104            android:exported="true"
-104-->[androidx.profileinstaller:profileinstaller:1.3.1] /home/fabio/.gradle/caches/8.10.2/transforms/5aacd87baa6feaa7bece87b01e7698f0/transformed/jetified-profileinstaller-1.3.1/AndroidManifest.xml:38:13-36
-105            android:permission="android.permission.DUMP" >
-105-->[androidx.profileinstaller:profileinstaller:1.3.1] /home/fabio/.gradle/caches/8.10.2/transforms/5aacd87baa6feaa7bece87b01e7698f0/transformed/jetified-profileinstaller-1.3.1/AndroidManifest.xml:39:13-57
-106            <intent-filter>
-106-->[androidx.profileinstaller:profileinstaller:1.3.1] /home/fabio/.gradle/caches/8.10.2/transforms/5aacd87baa6feaa7bece87b01e7698f0/transformed/jetified-profileinstaller-1.3.1/AndroidManifest.xml:40:13-42:29
-107                <action android:name="androidx.profileinstaller.action.INSTALL_PROFILE" />
-107-->[androidx.profileinstaller:profileinstaller:1.3.1] /home/fabio/.gradle/caches/8.10.2/transforms/5aacd87baa6feaa7bece87b01e7698f0/transformed/jetified-profileinstaller-1.3.1/AndroidManifest.xml:41:17-91
-107-->[androidx.profileinstaller:profileinstaller:1.3.1] /home/fabio/.gradle/caches/8.10.2/transforms/5aacd87baa6feaa7bece87b01e7698f0/transformed/jetified-profileinstaller-1.3.1/AndroidManifest.xml:41:25-88
-108            </intent-filter>
-109            <intent-filter>
-109-->[androidx.profileinstaller:profileinstaller:1.3.1] /home/fabio/.gradle/caches/8.10.2/transforms/5aacd87baa6feaa7bece87b01e7698f0/transformed/jetified-profileinstaller-1.3.1/AndroidManifest.xml:43:13-45:29
-110                <action android:name="androidx.profileinstaller.action.SKIP_FILE" />
-110-->[androidx.profileinstaller:profileinstaller:1.3.1] /home/fabio/.gradle/caches/8.10.2/transforms/5aacd87baa6feaa7bece87b01e7698f0/transformed/jetified-profileinstaller-1.3.1/AndroidManifest.xml:44:17-85
-110-->[androidx.profileinstaller:profileinstaller:1.3.1] /home/fabio/.gradle/caches/8.10.2/transforms/5aacd87baa6feaa7bece87b01e7698f0/transformed/jetified-profileinstaller-1.3.1/AndroidManifest.xml:44:25-82
-111            </intent-filter>
-112            <intent-filter>
-112-->[androidx.profileinstaller:profileinstaller:1.3.1] /home/fabio/.gradle/caches/8.10.2/transforms/5aacd87baa6feaa7bece87b01e7698f0/transformed/jetified-profileinstaller-1.3.1/AndroidManifest.xml:46:13-48:29
-113                <action android:name="androidx.profileinstaller.action.SAVE_PROFILE" />
-113-->[androidx.profileinstaller:profileinstaller:1.3.1] /home/fabio/.gradle/caches/8.10.2/transforms/5aacd87baa6feaa7bece87b01e7698f0/transformed/jetified-profileinstaller-1.3.1/AndroidManifest.xml:47:17-88
-113-->[androidx.profileinstaller:profileinstaller:1.3.1] /home/fabio/.gradle/caches/8.10.2/transforms/5aacd87baa6feaa7bece87b01e7698f0/transformed/jetified-profileinstaller-1.3.1/AndroidManifest.xml:47:25-85
-114            </intent-filter>
-115            <intent-filter>
-115-->[androidx.profileinstaller:profileinstaller:1.3.1] /home/fabio/.gradle/caches/8.10.2/transforms/5aacd87baa6feaa7bece87b01e7698f0/transformed/jetified-profileinstaller-1.3.1/AndroidManifest.xml:49:13-51:29
-116                <action android:name="androidx.profileinstaller.action.BENCHMARK_OPERATION" />
-116-->[androidx.profileinstaller:profileinstaller:1.3.1] /home/fabio/.gradle/caches/8.10.2/transforms/5aacd87baa6feaa7bece87b01e7698f0/transformed/jetified-profileinstaller-1.3.1/AndroidManifest.xml:50:17-95
-116-->[androidx.profileinstaller:profileinstaller:1.3.1] /home/fabio/.gradle/caches/8.10.2/transforms/5aacd87baa6feaa7bece87b01e7698f0/transformed/jetified-profileinstaller-1.3.1/AndroidManifest.xml:50:25-92
-117            </intent-filter>
-118        </receiver>
-119    </application>
-120
-121</manifest>
+57    <uses-permission android:name="com.coleapp.cole_app_flutter.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION" />
+57-->[androidx.core:core:1.15.0] /home/fabio/.gradle/caches/8.10.2/transforms/68e16af6c15662845d99d29588edd163/transformed/core-1.15.0/AndroidManifest.xml:26:5-97
+57-->[androidx.core:core:1.15.0] /home/fabio/.gradle/caches/8.10.2/transforms/68e16af6c15662845d99d29588edd163/transformed/core-1.15.0/AndroidManifest.xml:26:22-94
+58
+59    <application
+60        android:name="android.app.Application"
+61        android:appComponentFactory="androidx.core.app.CoreComponentFactory"
+61-->[androidx.core:core:1.15.0] /home/fabio/.gradle/caches/8.10.2/transforms/68e16af6c15662845d99d29588edd163/transformed/core-1.15.0/AndroidManifest.xml:28:18-86
+62        android:debuggable="true"
+63        android:extractNativeLibs="true"
+64        android:icon="@mipmap/launcher_icon"
+65        android:label="Cole" >
+66        <activity
+67            android:name="com.coleapp.cole_app_flutter.MainActivity"
+68            android:configChanges="orientation|keyboardHidden|keyboard|screenSize|smallestScreenSize|locale|layoutDirection|fontScale|screenLayout|density|uiMode"
+69            android:exported="true"
+70            android:hardwareAccelerated="true"
+71            android:launchMode="singleTop"
+72            android:taskAffinity=""
+73            android:theme="@style/LaunchTheme"
+74            android:windowSoftInputMode="adjustResize" >
+75
+76            <!--
+77                 Specifies an Android theme to apply to this Activity as soon as
+78                 the Android process has started. This theme is visible to the user
+79                 while the Flutter UI initializes. After that, this theme continues
+80                 to determine the Window background behind the Flutter UI.
+81            -->
+82            <meta-data
+83                android:name="io.flutter.embedding.android.NormalTheme"
+84                android:resource="@style/NormalTheme" />
+85
+86            <intent-filter>
+87                <action android:name="android.intent.action.MAIN" />
+88
+89                <category android:name="android.intent.category.LAUNCHER" />
+90            </intent-filter>
+91            <!-- Add notification click handling -->
+92            <intent-filter>
+93                <action android:name="FLUTTER_NOTIFICATION_CLICK" />
+94
+95                <category android:name="android.intent.category.DEFAULT" />
+96            </intent-filter>
+97        </activity>
+98        <!-- Add notification channel configuration -->
+99        <meta-data
+100            android:name="com.google.firebase.messaging.default_notification_channel_id"
+101            android:value="cole_notifications" />
+102        <!--
+103             Don't delete the meta-data below.
+104             This is used by the Flutter tool to generate GeneratedPluginRegistrant.java
+105        -->
+106        <meta-data
+107            android:name="flutterEmbedding"
+108            android:value="2" />
+109        <!-- Add notification receiver -->
+110        <receiver
+111            android:name="com.dexterous.flutterlocalnotifications.ScheduledNotificationReceiver"
+112            android:exported="false" />
+113        <receiver
+114            android:name="com.dexterous.flutterlocalnotifications.ScheduledNotificationBootReceiver"
+115            android:exported="false" >
+116            <intent-filter>
+117                <action android:name="android.intent.action.BOOT_COMPLETED" />
+118                <action android:name="android.intent.action.MY_PACKAGE_REPLACED" />
+119                <action android:name="android.intent.action.QUICKBOOT_POWERON" />
+120                <action android:name="com.htc.intent.action.QUICKBOOT_POWERON" />
+121            </intent-filter>
+122        </receiver>
+123
+124        <activity
+124-->[:url_launcher_android] /home/fabio/Projetcs/cole-timer-note-read/build/url_launcher_android/intermediates/merged_manifest/debug/processDebugManifest/AndroidManifest.xml:8:9-11:74
+125            android:name="io.flutter.plugins.urllauncher.WebViewActivity"
+125-->[:url_launcher_android] /home/fabio/Projetcs/cole-timer-note-read/build/url_launcher_android/intermediates/merged_manifest/debug/processDebugManifest/AndroidManifest.xml:9:13-74
+126            android:exported="false"
+126-->[:url_launcher_android] /home/fabio/Projetcs/cole-timer-note-read/build/url_launcher_android/intermediates/merged_manifest/debug/processDebugManifest/AndroidManifest.xml:10:13-37
+127            android:theme="@android:style/Theme.NoTitleBar.Fullscreen" />
+127-->[:url_launcher_android] /home/fabio/Projetcs/cole-timer-note-read/build/url_launcher_android/intermediates/merged_manifest/debug/processDebugManifest/AndroidManifest.xml:11:13-71
+128
+129        <provider
+129-->[androidx.lifecycle:lifecycle-process:2.8.7] /home/fabio/.gradle/caches/8.10.2/transforms/dc3934e7b5992873779b6c0d978229f8/transformed/jetified-lifecycle-process-2.8.7/AndroidManifest.xml:24:9-32:20
+130            android:name="androidx.startup.InitializationProvider"
+130-->[androidx.lifecycle:lifecycle-process:2.8.7] /home/fabio/.gradle/caches/8.10.2/transforms/dc3934e7b5992873779b6c0d978229f8/transformed/jetified-lifecycle-process-2.8.7/AndroidManifest.xml:25:13-67
+131            android:authorities="com.coleapp.cole_app_flutter.androidx-startup"
+131-->[androidx.lifecycle:lifecycle-process:2.8.7] /home/fabio/.gradle/caches/8.10.2/transforms/dc3934e7b5992873779b6c0d978229f8/transformed/jetified-lifecycle-process-2.8.7/AndroidManifest.xml:26:13-68
+132            android:exported="false" >
+132-->[androidx.lifecycle:lifecycle-process:2.8.7] /home/fabio/.gradle/caches/8.10.2/transforms/dc3934e7b5992873779b6c0d978229f8/transformed/jetified-lifecycle-process-2.8.7/AndroidManifest.xml:27:13-37
+133            <meta-data
+133-->[androidx.lifecycle:lifecycle-process:2.8.7] /home/fabio/.gradle/caches/8.10.2/transforms/dc3934e7b5992873779b6c0d978229f8/transformed/jetified-lifecycle-process-2.8.7/AndroidManifest.xml:29:13-31:52
+134                android:name="androidx.lifecycle.ProcessLifecycleInitializer"
+134-->[androidx.lifecycle:lifecycle-process:2.8.7] /home/fabio/.gradle/caches/8.10.2/transforms/dc3934e7b5992873779b6c0d978229f8/transformed/jetified-lifecycle-process-2.8.7/AndroidManifest.xml:30:17-78
+135                android:value="androidx.startup" />
+135-->[androidx.lifecycle:lifecycle-process:2.8.7] /home/fabio/.gradle/caches/8.10.2/transforms/dc3934e7b5992873779b6c0d978229f8/transformed/jetified-lifecycle-process-2.8.7/AndroidManifest.xml:31:17-49
+136            <meta-data
+136-->[androidx.profileinstaller:profileinstaller:1.3.1] /home/fabio/.gradle/caches/8.10.2/transforms/5aacd87baa6feaa7bece87b01e7698f0/transformed/jetified-profileinstaller-1.3.1/AndroidManifest.xml:29:13-31:52
+137                android:name="androidx.profileinstaller.ProfileInstallerInitializer"
+137-->[androidx.profileinstaller:profileinstaller:1.3.1] /home/fabio/.gradle/caches/8.10.2/transforms/5aacd87baa6feaa7bece87b01e7698f0/transformed/jetified-profileinstaller-1.3.1/AndroidManifest.xml:30:17-85
+138                android:value="androidx.startup" />
+138-->[androidx.profileinstaller:profileinstaller:1.3.1] /home/fabio/.gradle/caches/8.10.2/transforms/5aacd87baa6feaa7bece87b01e7698f0/transformed/jetified-profileinstaller-1.3.1/AndroidManifest.xml:31:17-49
+139        </provider>
+140
+141        <uses-library
+141-->[androidx.window:window:1.2.0] /home/fabio/.gradle/caches/8.10.2/transforms/aed2861b2b6894f7067df3f3f96b791f/transformed/jetified-window-1.2.0/AndroidManifest.xml:23:9-25:40
+142            android:name="androidx.window.extensions"
+142-->[androidx.window:window:1.2.0] /home/fabio/.gradle/caches/8.10.2/transforms/aed2861b2b6894f7067df3f3f96b791f/transformed/jetified-window-1.2.0/AndroidManifest.xml:24:13-54
+143            android:required="false" />
+143-->[androidx.window:window:1.2.0] /home/fabio/.gradle/caches/8.10.2/transforms/aed2861b2b6894f7067df3f3f96b791f/transformed/jetified-window-1.2.0/AndroidManifest.xml:25:13-37
+144        <uses-library
+144-->[androidx.window:window:1.2.0] /home/fabio/.gradle/caches/8.10.2/transforms/aed2861b2b6894f7067df3f3f96b791f/transformed/jetified-window-1.2.0/AndroidManifest.xml:26:9-28:40
+145            android:name="androidx.window.sidecar"
+145-->[androidx.window:window:1.2.0] /home/fabio/.gradle/caches/8.10.2/transforms/aed2861b2b6894f7067df3f3f96b791f/transformed/jetified-window-1.2.0/AndroidManifest.xml:27:13-51
+146            android:required="false" />
+146-->[androidx.window:window:1.2.0] /home/fabio/.gradle/caches/8.10.2/transforms/aed2861b2b6894f7067df3f3f96b791f/transformed/jetified-window-1.2.0/AndroidManifest.xml:28:13-37
+147
+148        <receiver
+148-->[androidx.profileinstaller:profileinstaller:1.3.1] /home/fabio/.gradle/caches/8.10.2/transforms/5aacd87baa6feaa7bece87b01e7698f0/transformed/jetified-profileinstaller-1.3.1/AndroidManifest.xml:34:9-52:20
+149            android:name="androidx.profileinstaller.ProfileInstallReceiver"
+149-->[androidx.profileinstaller:profileinstaller:1.3.1] /home/fabio/.gradle/caches/8.10.2/transforms/5aacd87baa6feaa7bece87b01e7698f0/transformed/jetified-profileinstaller-1.3.1/AndroidManifest.xml:35:13-76
+150            android:directBootAware="false"
+150-->[androidx.profileinstaller:profileinstaller:1.3.1] /home/fabio/.gradle/caches/8.10.2/transforms/5aacd87baa6feaa7bece87b01e7698f0/transformed/jetified-profileinstaller-1.3.1/AndroidManifest.xml:36:13-44
+151            android:enabled="true"
+151-->[androidx.profileinstaller:profileinstaller:1.3.1] /home/fabio/.gradle/caches/8.10.2/transforms/5aacd87baa6feaa7bece87b01e7698f0/transformed/jetified-profileinstaller-1.3.1/AndroidManifest.xml:37:13-35
+152            android:exported="true"
+152-->[androidx.profileinstaller:profileinstaller:1.3.1] /home/fabio/.gradle/caches/8.10.2/transforms/5aacd87baa6feaa7bece87b01e7698f0/transformed/jetified-profileinstaller-1.3.1/AndroidManifest.xml:38:13-36
+153            android:permission="android.permission.DUMP" >
+153-->[androidx.profileinstaller:profileinstaller:1.3.1] /home/fabio/.gradle/caches/8.10.2/transforms/5aacd87baa6feaa7bece87b01e7698f0/transformed/jetified-profileinstaller-1.3.1/AndroidManifest.xml:39:13-57
+154            <intent-filter>
+154-->[androidx.profileinstaller:profileinstaller:1.3.1] /home/fabio/.gradle/caches/8.10.2/transforms/5aacd87baa6feaa7bece87b01e7698f0/transformed/jetified-profileinstaller-1.3.1/AndroidManifest.xml:40:13-42:29
+155                <action android:name="androidx.profileinstaller.action.INSTALL_PROFILE" />
+155-->[androidx.profileinstaller:profileinstaller:1.3.1] /home/fabio/.gradle/caches/8.10.2/transforms/5aacd87baa6feaa7bece87b01e7698f0/transformed/jetified-profileinstaller-1.3.1/AndroidManifest.xml:41:17-91
+155-->[androidx.profileinstaller:profileinstaller:1.3.1] /home/fabio/.gradle/caches/8.10.2/transforms/5aacd87baa6feaa7bece87b01e7698f0/transformed/jetified-profileinstaller-1.3.1/AndroidManifest.xml:41:25-88
+156            </intent-filter>
+157            <intent-filter>
+157-->[androidx.profileinstaller:profileinstaller:1.3.1] /home/fabio/.gradle/caches/8.10.2/transforms/5aacd87baa6feaa7bece87b01e7698f0/transformed/jetified-profileinstaller-1.3.1/AndroidManifest.xml:43:13-45:29
+158                <action android:name="androidx.profileinstaller.action.SKIP_FILE" />
+158-->[androidx.profileinstaller:profileinstaller:1.3.1] /home/fabio/.gradle/caches/8.10.2/transforms/5aacd87baa6feaa7bece87b01e7698f0/transformed/jetified-profileinstaller-1.3.1/AndroidManifest.xml:44:17-85
+158-->[androidx.profileinstaller:profileinstaller:1.3.1] /home/fabio/.gradle/caches/8.10.2/transforms/5aacd87baa6feaa7bece87b01e7698f0/transformed/jetified-profileinstaller-1.3.1/AndroidManifest.xml:44:25-82
+159            </intent-filter>
+160            <intent-filter>
+160-->[androidx.profileinstaller:profileinstaller:1.3.1] /home/fabio/.gradle/caches/8.10.2/transforms/5aacd87baa6feaa7bece87b01e7698f0/transformed/jetified-profileinstaller-1.3.1/AndroidManifest.xml:46:13-48:29
+161                <action android:name="androidx.profileinstaller.action.SAVE_PROFILE" />
+161-->[androidx.profileinstaller:profileinstaller:1.3.1] /home/fabio/.gradle/caches/8.10.2/transforms/5aacd87baa6feaa7bece87b01e7698f0/transformed/jetified-profileinstaller-1.3.1/AndroidManifest.xml:47:17-88
+161-->[androidx.profileinstaller:profileinstaller:1.3.1] /home/fabio/.gradle/caches/8.10.2/transforms/5aacd87baa6feaa7bece87b01e7698f0/transformed/jetified-profileinstaller-1.3.1/AndroidManifest.xml:47:25-85
+162            </intent-filter>
+163            <intent-filter>
+163-->[androidx.profileinstaller:profileinstaller:1.3.1] /home/fabio/.gradle/caches/8.10.2/transforms/5aacd87baa6feaa7bece87b01e7698f0/transformed/jetified-profileinstaller-1.3.1/AndroidManifest.xml:49:13-51:29
+164                <action android:name="androidx.profileinstaller.action.BENCHMARK_OPERATION" />
+164-->[androidx.profileinstaller:profileinstaller:1.3.1] /home/fabio/.gradle/caches/8.10.2/transforms/5aacd87baa6feaa7bece87b01e7698f0/transformed/jetified-profileinstaller-1.3.1/AndroidManifest.xml:50:17-95
+164-->[androidx.profileinstaller:profileinstaller:1.3.1] /home/fabio/.gradle/caches/8.10.2/transforms/5aacd87baa6feaa7bece87b01e7698f0/transformed/jetified-profileinstaller-1.3.1/AndroidManifest.xml:50:25-92
+165            </intent-filter>
+166        </receiver>
+167    </application>
+168
+169</manifest>
